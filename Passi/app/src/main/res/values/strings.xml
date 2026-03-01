@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Conta Passi</string>
+    <string name="title_home">Home</string>
+    <string name="title_goals">Obiettivi</string>
+    <string name="title_settings">Impostazioni</string>
+    <string name="data">caricamento data in corso</string>
+    <string name="passiOggi">100000</string>
+    <string name="passiObiettivo">/200000</string>
+    <string name="meteoSole">Soleggiato</string>
+    <string name="temperatura">25° C</string>
+    <string name="km">10 km</string>
+    <string name="passi">passi</string>
+    <string name="passiStandard">Progresso rispetto all\'obiettivo di diecimila passi al giorno suggerito dall\'OMS</string>
+    <string name="statistiche">Statistiche</string>
+    <string name="settimana">Settimana</string>
+    <string name="mese">Mese</string>
+    <string name="obiettivi">Obiettivi</string>
+    <string name="title_stats">Statistiche</string>
+    <string name="element_text">Elemento della lista</string>
+    <string name="giorno">26</string>
+    <string name="titolo_raccolta_dati">Raccolta dati sui passi</string>
+    <string name="testo_raccolta_dati">Puoi disabilitare il conteggio dei passi nei momenti di non utilizzo per risparmiare batteria sul tuo dispositivo</string>
+    <string name="titolo_obiettivo">Obiettivo personalizzato</string>
+    <string name="testo_obiettivo">L\'OMS ha stabilito che l\'obiettivo giornaliero dovrebbe essere pari a 10000 passi, tuttavia se preferisci puoi impostare un tuo obiettivo personale differente</string>
+    <string name="passiEtichetta">passi</string>
+    <string name="titolo_altezza">La tua altezza</string>
+    <string name="testo_altezza">Quest\'app non utilizza il gps per calcolare i chilometri percorsi ma può comunque fornire un risultato approssimativo basandosi sulla tua altezza e sul numero di passi fatti</string>
+    <string name="altezzaEtichetta">centimetri</string>
+    <string name="calorie">5000 kcal</string>
+    <string name="meseOb">giu</string>
+    <string name="suPassiOb">/2000000</string>
+    <string name="kmEtichetta">1,754 km</string>
+    <string name="kcalEtichetta">750 kcal</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+</resources>

@@ -1,0 +1,83 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.databinding",
+    "module": "databinding-adapters",
+    "version": "8.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "8.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "databinding-adapters-8.1.0.aar",
+          "url": "databinding-adapters-8.1.0.aar",
+          "size": 70378,
+          "sha512": "be3a90aabbb9738a5f96e9fb1f2f6b8348fe6a6954389cac4043b4d8c7878d73c202e88f9abf132cb374bca0f556510b1969185caacb62e2eda96b301428d7a1",
+          "sha256": "ac42b1473f8b6a5b4d70073370d20b7f1ee33102a9cb91239a711a062a9856a5",
+          "sha1": "8f74c8efd999f5e5249be4ddaba26e3723c8a18e",
+          "md5": "d09a854a041b869cdea560a0fe1fd6f0"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "8.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "8.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "databinding-adapters-8.1.0.aar",
+          "url": "databinding-adapters-8.1.0.aar",
+          "size": 70378,
+          "sha512": "be3a90aabbb9738a5f96e9fb1f2f6b8348fe6a6954389cac4043b4d8c7878d73c202e88f9abf132cb374bca0f556510b1969185caacb62e2eda96b301428d7a1",
+          "sha256": "ac42b1473f8b6a5b4d70073370d20b7f1ee33102a9cb91239a711a062a9856a5",
+          "sha1": "8f74c8efd999f5e5249be4ddaba26e3723c8a18e",
+          "md5": "d09a854a041b869cdea560a0fe1fd6f0"
+        }
+      ]
+    }
+  ]
+}

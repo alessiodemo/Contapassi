@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.HomeFragment">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="30dp">
+
+        <TextView
+            android:id="@+id/giorno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/data"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/passiProgress"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_centerInParent="true"
+                android:indeterminateOnly="false"
+                android:progress="80"
+                android:progressDrawable="@drawable/circular_progress" />
+
+            <LinearLayout
+                android:id="@+id/passiOggiGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/passi"/>
+                <TextView
+                    android:id="@+id/passiOggi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/passiOggi"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="40sp"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/passiObiettivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="20sp"
+                    android:text="@string/passiObiettivo"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="20sp"
+            android:background="@drawable/rounded_corners"
+            android:padding="10sp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10sp">
+                <ImageView
+                    android:id="@+id/meteoIcona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/sunny"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:padding="10sp"/>
+                <TextView
+                    android:id="@+id/meteoTesto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/temperatura"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10sp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fire"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:padding="10sp"/>
+                <TextView
+                    android:id="@+id/calorieTesto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calorie"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10sp">
+                <ImageView
+                    android:id="@+id/kmIcona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/route"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:padding="10sp"/>
+                <TextView
+                    android:id="@+id/kmTesto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/km"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="20"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/linear_progress"
+            android:layout_marginHorizontal="20sp"
+            android:layout_marginTop="30sp"/>
+
+        <TextView
+            android:layout_marginHorizontal="20sp"
+            android:layout_marginVertical="10sp"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/passiStandard"/>
+    </LinearLayout>
+
+</FrameLayout>
