@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="instrumented-module-intellij.libraries.gson2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/caches/9.0.0/transforms/d80cee15e0767c9f48b1c1b602a62e7d/transformed/instrumented/instrumented-module-intellij.libraries.gson.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="instrumented-listenablefuture-9999.0-empty-to-avoid-conflict-with-guava">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/caches/8.10.2/transforms/08fc71f7768c96e7df649a9ce01d1e9d/transformed/instrumented/instrumented-listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

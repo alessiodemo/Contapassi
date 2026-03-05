@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="instrumented-external-system-rt">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/caches/8.10.2/transforms/e949c53ac0f0f5b1c2514c3424141321/transformed/instrumented/instrumented-external-system-rt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

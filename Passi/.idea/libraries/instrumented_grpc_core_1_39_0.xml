@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="instrumented-grpc-core-1.39.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/caches/9.0.0/transforms/21fca412315031c708d784d2ec7d15c4/transformed/instrumented/instrumented-grpc-core-1.39.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

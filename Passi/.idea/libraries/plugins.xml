@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="plugins">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/gradle-ivy-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/gradle-testing-base-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/google-http-client-1.42.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/gradle-resources-gcs-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/gradle-signing-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/gradle-ide-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/jna-5.17.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/gradle-plugins-jvm-test-fixtures-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/plugins/gradle-tooling-native-9.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

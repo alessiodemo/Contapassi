@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="plugins2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/plugins/junit-platform-commons-1.8.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/plugins/opentest4j-1.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/plugins/maven-model-3.9.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/plugins/google-api-client-1.34.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/plugins/gradle-core-serialization-codecs-8.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/plugins/maven-settings-builder-3.9.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/plugins/gradle-java-compiler-plugin-8.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/plugins/gradle-reporting-8.10.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

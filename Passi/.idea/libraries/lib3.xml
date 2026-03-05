@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="lib3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/log4j-over-slf4j-1.7.36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/failureaccess-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/commons-codec-1.16.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/minlog-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/kotlin-script-runtime-1.9.24.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/gradle-build-option-8.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/groovy-3.0.22.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/native-platform-linux-aarch64-ncurses5-0.22-milestone-26.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/gradle-model-core-8.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/gradle-kotlin-dsl-shared-runtime-8.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/error_prone_annotations-2.29.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/kotlinx-serialization-core-jvm-1.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/kotlin-daemon-embeddable-1.9.24.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/gradle-gradle-cli-8.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/gradle-configuration-problems-base-8.10.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

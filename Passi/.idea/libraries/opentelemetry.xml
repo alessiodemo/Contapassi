@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="opentelemetry">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/caches/9.0.0/transforms/8cb232e585f76571576a7504fe0d6178/transformed/original/opentelemetry.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

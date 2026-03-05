@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="lib4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/native-platform-freebsd-amd64-libcpp-0.22-milestone-23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/gradle-enterprise-workers-7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/native-platform-linux-aarch64-0.22-milestone-23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/groovy-console-3.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/slf4j-api-1.7.30.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/kotlin-stdlib-jdk7-1.6.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/gradle-enterprise-logging-7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/jna-5.10.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/javax.inject-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/groovy-dateutil-3.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/commons-io-2.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/annotations-20.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/kotlin-compiler-embeddable-1.6.21-patched-for-gradle-7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-7.5-bin/f1w0cc9nuo0eivz97x2xlu9sv/gradle-7.5/lib/asm-commons-9.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

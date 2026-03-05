@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="instrumented-grpc-netty-1.45.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/caches/8.10.2/transforms/cedba748ec47d4d5546066279f68f968/transformed/instrumented/instrumented-grpc-netty-1.45.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
