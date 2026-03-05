@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/kotlin-reflect-2.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/gradle-file-watching-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/native-platform-osx-amd64-0.22-milestone-28.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/javax.inject-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/kotlin-scripting-jvm-host-2.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/groovy-xml-4.0.27.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/gradle-gradle-cli-main-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/kotlin-build-tools-impl-2.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/ant-antlr-1.10.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/groovy-docgenerator-4.0.27.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/gradle-time-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/groovy-json-4.0.27.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/jackson-annotations-2.16.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/gradle-declarative-dsl-provider-9.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

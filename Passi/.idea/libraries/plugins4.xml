@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="plugins4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.13-bin/5xuhj0ry160q40clulazy9h7d/gradle-8.13/lib/plugins/aws-java-sdk-s3-1.12.780.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.13-bin/5xuhj0ry160q40clulazy9h7d/gradle-8.13/lib/plugins/gradle-resources-gcs-8.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.13-bin/5xuhj0ry160q40clulazy9h7d/gradle-8.13/lib/plugins/gradle-wrapper-main-8.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.13-bin/5xuhj0ry160q40clulazy9h7d/gradle-8.13/lib/plugins/gradle-guava-serialization-codecs-8.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.13-bin/5xuhj0ry160q40clulazy9h7d/gradle-8.13/lib/plugins/jcommander-1.78.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.13-bin/5xuhj0ry160q40clulazy9h7d/gradle-8.13/lib/plugins/bcpg-jdk18on-1.78.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.13-bin/5xuhj0ry160q40clulazy9h7d/gradle-8.13/lib/plugins/gradle-security-8.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wrapper/dists/gradle-8.13-bin/5xuhj0ry160q40clulazy9h7d/gradle-8.13/lib/plugins/gradle-ear-8.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
