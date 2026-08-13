@@ -1,4 +1,4 @@
-package com.example.passi.entities
+package com.example.passi.data.model
 
 import java.util.*
 import com.example.passi.Utility
