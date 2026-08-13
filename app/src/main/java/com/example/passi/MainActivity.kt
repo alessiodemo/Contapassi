@@ -1,21 +1,46 @@
 package com.example.passi
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.passi.data.repository.StepRepository
 import com.example.passi.data.sensor.StepCounterManager
 import com.example.passi.databinding.ActivityMainBinding
+import com.example.passi.home.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var stepCounterManager: StepCounterManager
+
+    private lateinit var homeViewModel: HomeViewModel
+
+
+
+    private val requestActivityRecognitionPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                startStepCounter()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Senza il permesso 'Attività fisica' il conteggio passi non funziona",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,36 +62,45 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        stepCounterManager = StepCounterManager(this)
-        stepCounterManager.setListener { currentSteps ->
-            binding.tvStepsTaken.text = "$currentSteps"
+        val stepRepo = StepRepository(this)
+        stepCounterManager = StepCounterManager(this, stepRepo)
+        stepCounterManager.setListener { steps ->
+            homeViewModel.updateSteps(steps)
+
+
         }
 
-        binding.tvStepsTaken.setOnClickListener {
-            // This will give a toast message if the user want to reset the steps
-            Toast.makeText(this, "Long tap to reset steps", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.tvStepsTaken.setOnLongClickListener {
-            stepCounterManager.resetSteps()
-            true
-        }
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
     }
 
     override fun onResume() {
         super.onResume()
 
-        // Returns the number of steps taken by the user since the last reboot while activated
-        // This sensor requires permission android.permission.ACTIVITY_RECOGNITION.
-        // So don't forget to add the following permission in AndroidManifest.xml present in manifest folder of the app.
-        val sensorAvailable = stepCounterManager.start()
-        if (!sensorAvailable) {
-            Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show()
+        // ACTIVITY_RECOGNITION is required starting from Android 10 (API 29) to read
+        // TYPE_STEP_COUNTER; below that the sensor is available without any permission.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q ||
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            startStepCounter()
+        } else {
+            requestActivityRecognitionPermission.launch(Manifest.permission.ACTIVITY_RECOGNITION)
         }
     }
 
     override fun onPause() {
         super.onPause()
         stepCounterManager.stop()
+    }
+
+    private fun startStepCounter() {
+        val sensorAvailable = stepCounterManager.start()
+        if (!sensorAvailable) {
+            Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun resetSteps() {
+        stepCounterManager.resetSteps()
     }
 }

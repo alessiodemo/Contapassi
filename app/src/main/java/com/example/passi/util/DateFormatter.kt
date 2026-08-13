@@ -1,17 +1,11 @@
-package com.example.passi
+package com.example.passi.util
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
-class Utility {
-    fun getPassiObiettivo(dataOggi: Date): Int {
-        return 7000
-    }
-
-    fun getPassiGiorno(dataOggi: Date): Int {
-        return 2500
-    }
-
+class DateFormatter {
     fun getDataOggi(): Date {
         val calendario = Calendar.getInstance() //ottieni il calendario
         val dataOdierna = calendario.time //ottieni la data di oggi
@@ -19,17 +13,22 @@ class Utility {
     }
 
     fun dataSGMA(data: Date?): String? {
-        val formatoData = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()) //crea il formato per la data
+        val formatoData = SimpleDateFormat(
+            "EEEE, dd MMMM yyyy",
+            Locale.getDefault()
+        ) //crea il formato per la data
         return data?.let { formatoData.format(it) } //ritorna la data formattata
     }
 
     fun dataMeseAbbreviato(data: Date?): String? {
-        val formatoData = SimpleDateFormat("MMM", Locale.getDefault()) //crea il formato per estrarre il mese
+        val formatoData =
+            SimpleDateFormat("MMM", Locale.getDefault()) //crea il formato per estrarre il mese
         return data?.let { formatoData.format(it) } //ritorna il mese
     }
 
     fun dataGiorno(data: Date?): Int? {
-        val formatoData = SimpleDateFormat("dd", Locale.getDefault()) //crea il formato per estrarre il giorno
+        val formatoData =
+            SimpleDateFormat("dd", Locale.getDefault()) //crea il formato per estrarre il giorno
         return data?.let { formatoData.format(it).toInt() } //ritorna il giorno
     }
 }

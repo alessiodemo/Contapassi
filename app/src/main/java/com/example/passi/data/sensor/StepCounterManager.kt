@@ -5,8 +5,9 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import com.example.passi.data.repository.StepRepository
 
-class StepCounterManager(context: Context) : SensorEventListener {
+class StepCounterManager(context: Context, private val repository: StepRepository) : SensorEventListener {
 
     fun interface Listener {
         fun onStepsChanged(currentSteps: Int)
@@ -22,7 +23,7 @@ class StepCounterManager(context: Context) : SensorEventListener {
     private var previousTotalSteps = 0f
 
     init {
-        loadData()
+        previousTotalSteps= repository.getPreviousTotalSteps()
     }
 
     fun setListener(listener: Listener?) {
@@ -50,6 +51,12 @@ class StepCounterManager(context: Context) : SensorEventListener {
         if (running) {
             totalSteps = event!!.values[0]
 
+            if(repository.isNewDay()) {
+                previousTotalSteps = totalSteps
+                repository.savePreviousTotalSteps(previousTotalSteps)
+                repository.saveResetDate()
+            }
+
             // Current steps are calculated by taking the difference of total steps
             // and previous steps
             val currentSteps = totalSteps.toInt() - previousTotalSteps.toInt()
@@ -59,18 +66,8 @@ class StepCounterManager(context: Context) : SensorEventListener {
 
     fun resetSteps() {
         previousTotalSteps = totalSteps
-        saveData()
+        repository.savePreviousTotalSteps(previousTotalSteps)
         listener?.onStepsChanged(0)
-    }
-
-    private fun saveData() {
-        val sharedPreferences = appContext.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putFloat("key1", previousTotalSteps).apply()
-    }
-
-    private fun loadData() {
-        val sharedPreferences = appContext.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        previousTotalSteps = sharedPreferences.getFloat("key1", 0f)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

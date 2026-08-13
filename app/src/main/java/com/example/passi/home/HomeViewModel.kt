@@ -1,14 +1,16 @@
 package com.example.passi.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
 
-    // Create a LiveData with a String
-    val currentName: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
+    //LiveData for the current steps
+    private val _currentSteps = MutableLiveData<Int>()
+    val currentSteps: LiveData<Int> = _currentSteps
+
+    fun updateSteps(steps: Int) {
+        _currentSteps.value = steps
     }
-
-
 }

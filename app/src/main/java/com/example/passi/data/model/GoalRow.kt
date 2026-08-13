@@ -1,10 +1,10 @@
 package com.example.passi.data.model
 
 import java.util.*
-import com.example.passi.Utility
+import com.example.passi.util.DateFormatter
 import java.text.DecimalFormat
 
-val ut = Utility()
+val ut = DateFormatter()
 
 class GoalRow(d: Date, p: Int, o: Int, k: Int, m: Int) {
     val passi = p
