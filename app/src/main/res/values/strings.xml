@@ -7,7 +7,7 @@
     <string name="passiOggi">100000</string>
     <string name="passiObiettivo">/200000</string>
     <string name="meteoSole">Soleggiato</string>
-    <string name="temperatura">25° C</string>
+    <string name="temperatura">--° C</string>
     <string name="km">10 km</string>
     <string name="passi">passi</string>
     <string name="passiStandard">Progresso rispetto all\'obiettivo di diecimila passi al giorno suggerito dall\'OMS</string>
