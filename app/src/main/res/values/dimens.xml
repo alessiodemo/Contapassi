@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- scala tipografica dell'app, valori base per telefono. Sovrascritta per tablet in values-sw600dp/dimens.xml -->
+    <dimen name="text_size_display">40sp</dimen>
+    <dimen name="text_size_widget_headline">28sp</dimen>
+    <dimen name="text_size_headline">24sp</dimen>
+    <dimen name="text_size_title">22sp</dimen>
+    <dimen name="text_size_subtitle">20sp</dimen>
+    <dimen name="text_size_body">18sp</dimen>
+</resources>

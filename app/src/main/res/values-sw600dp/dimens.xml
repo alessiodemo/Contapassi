@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- override per tablet 7"+ (larghezza minima 600dp) -->
+    <dimen name="text_size_display">52sp</dimen>
+    <dimen name="text_size_widget_headline">34sp</dimen>
+    <dimen name="text_size_headline">30sp</dimen>
+    <dimen name="text_size_title">27sp</dimen>
+    <dimen name="text_size_subtitle">25sp</dimen>
+    <dimen name="text_size_body">22sp</dimen>
+</resources>
