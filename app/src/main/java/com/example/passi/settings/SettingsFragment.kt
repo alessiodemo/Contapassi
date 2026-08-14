@@ -15,12 +15,15 @@ import androidx.core.content.ContextCompat.startForegroundService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.passi.BuildConfig
-import com.example.passi.core.data.Database
 import com.example.passi.core.service.ForegroundService
 import com.example.passi.R
 import com.example.passi.SharedViewModel
+import com.example.passi.core.data.AppDatabase
+import com.example.passi.core.data.StepRepository
 import com.example.passi.core.utility.Utility
+import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment() {
 
@@ -42,48 +45,58 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //richiama il database
-        val db = Database(requireContext())
+        val repository = StepRepository(AppDatabase.getInstance(requireContext()).stepDao())
 
         //crea l'observer che aggiorna l'interfaccia
-        val obs = Observer<Boolean> { valori ->
-            //recupera i obiettivo e altezza dal database e aggiornali
-            val key = db.formatKey(ut.getDataOggi())
-            val valoriPassi = db.getValuesFromKey(key)
-            view.findViewById<EditText>(R.id.inputObiettivo).setText(valoriPassi[1].toString())
-            view.findViewById<EditText>(R.id.inputAltezza).setText(valoriPassi[2].toString())
-        }
-
-        //collega l'observer
-        model.getData().observe(viewLifecycleOwner, obs)
-
-        //attiva la prima modifica
-        model.setData(true)
-
-        //imposta le azioni alla modifica dell'obiettivo e dell'altezza
-        view.findViewById<Button>(R.id.aggiornaValori).setOnClickListener{
-            val key = db.formatKey(ut.getDataOggi())
-            db.updateHeight(key, view.findViewById<EditText>(R.id.inputAltezza).text.toString().toInt())
-            db.updateGoal(key, view.findViewById<EditText>(R.id.inputObiettivo).text.toString().toInt())
-            model.setData(true)
-            Toast.makeText(requireContext(), "Modifiche salvate", Toast.LENGTH_SHORT).show()
-        }
-
-        //imposta le azioni alla modifica dello switch
-        view.findViewById<Switch>(R.id.raccolta_dati_switch).setOnCheckedChangeListener{buttonView, isChecked ->
-            if (isChecked) {
-                val intent = Intent(requireContext(), ForegroundService::class.java)
-                startForegroundService(requireContext(),intent)
-            } else {
-                val intentStop = Intent(requireContext(), ForegroundService::class.java)
-                intentStop.action = ACTION_STOP
-                startForegroundService(requireContext(),intentStop)
+        val obs = Observer<Boolean> { _ ->
+            viewLifecycleOwner.lifecycleScope.launch {
+                //recupera i obiettivo e altezza dal database e aggiornali
+                val key = repository.formatKey(ut.getDataOggi())
+                val valoriPassi = repository.getValueFromKey(key)
+                view.findViewById<EditText>(R.id.inputObiettivo).setText(valoriPassi[1].toString())
+                view.findViewById<EditText>(R.id.inputAltezza).setText(valoriPassi[2].toString())
             }
         }
 
-        //imposta lo stato iniziale dello switch
-        val status = isForegroundServiceRunning(ForegroundService::class.java)
-        view.findViewById<Switch>(R.id.raccolta_dati_switch).isChecked = status
+            //collega l'observer
+            model.getData().observe(viewLifecycleOwner, obs)
+
+            //attiva la prima modifica
+            model.setData(true)
+
+            //imposta le azioni alla modifica dell'obiettivo e dell'altezza
+            view.findViewById<Button>(R.id.aggiornaValori).setOnClickListener {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val key = repository.formatKey(ut.getDataOggi())
+                    repository.updateHeight(
+                        key,
+                        view.findViewById<EditText>(R.id.inputAltezza).text.toString().toInt()
+                    )
+                    repository.updateGoal(
+                        key,
+                        view.findViewById<EditText>(R.id.inputObiettivo).text.toString().toInt()
+                    )
+                    model.setData(true)
+                    Toast.makeText(requireContext(), "Modifiche salvate", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            //imposta le azioni alla modifica dello switch
+            view.findViewById<Switch>(R.id.raccolta_dati_switch)
+                .setOnCheckedChangeListener { buttonView, isChecked ->
+                    if (isChecked) {
+                        val intent = Intent(requireContext(), ForegroundService::class.java)
+                        startForegroundService(requireContext(), intent)
+                    } else {
+                        val intentStop = Intent(requireContext(), ForegroundService::class.java)
+                        intentStop.action = ACTION_STOP
+                        startForegroundService(requireContext(), intentStop)
+                    }
+                }
+
+            //imposta lo stato iniziale dello switch
+            val status = isForegroundServiceRunning(ForegroundService::class.java)
+            view.findViewById<Switch>(R.id.raccolta_dati_switch).isChecked = status
     }
 
     //controlla se il foreground service è attivo

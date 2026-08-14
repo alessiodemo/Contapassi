@@ -11,10 +11,10 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="2sp"
+        android:drawablePadding="2dp"
         android:gravity="center"
         android:text="@string/passi"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size_headline"
         android:textStyle="bold|italic"
         android:typeface="normal" />
 
@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:drawableLeft="@drawable/fire"
             android:text="@string/calorie"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_subtitle"
             android:gravity="center"
             android:layout_marginRight="-110dp" />
 
@@ -44,7 +44,7 @@
             android:drawableLeft="@drawable/sunny"
             android:text="@string/meteoSole"
             android:gravity="center"
-            android:textSize="20sp" />
+            android:textSize="@dimen/text_size_subtitle" />
 
 
     </LinearLayout>
@@ -54,7 +54,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textSize="20sp">
+        android:textSize="@dimen/text_size_subtitle">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/passiOggi"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_size_subtitle"
                 android:textColor="@color/black" />
             <TextView
                 android:id="@+id/mediaKmSettimana"
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/passiOggi"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_size_subtitle"
                 android:textColor="@color/black" />
             <TextView
                 android:id="@+id/mediaKmMese"
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/passiOggi"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_size_subtitle"
                 android:textColor="@color/black" />
             <TextView
                 android:id="@+id/obiettiviTotali"

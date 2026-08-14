@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.example.passi.core.data.Database
 import com.example.passi.core.location.LocationProvider
 import com.example.passi.MainActivity
 import com.example.passi.R
@@ -48,7 +47,7 @@ class HomeFragment : Fragment() {
         val repository  = StepRepository(AppDatabase.getInstance(requireContext()).stepDao())
 
         //crea l'observer che aggiorna l'interfaccia
-        val obs = Observer<Boolean> { valori ->
+        val obs = Observer<Boolean> { _ ->
             viewLifecycleOwner.lifecycleScope.launch {
                 //aggiorna la data
                 view.findViewById<TextView>(R.id.giorno).text = ut.dataSGMA(ut.getDataOggi())

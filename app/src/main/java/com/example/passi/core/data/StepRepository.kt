@@ -36,7 +36,7 @@ class StepRepository(private val dao: StepDao) {
 
             if(obiettivo == 0) {
                 val lastKey = dao.getLastId()
-                al = if(lastKey == null) default_height else dao.getById(lastKey)!!.height
+                ob = if(lastKey == null) default_goal else dao.getById(lastKey)!!.goal
             }
             if(altezza == 0) {
                 val lastKey = dao.getLastId()

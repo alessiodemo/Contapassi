@@ -11,8 +11,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="25sp"
-            android:paddingVertical="15sp"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="15dp"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"
@@ -31,7 +31,7 @@
                         android:id="@+id/giornoOb"
                         android:text="@string/giorno"
                         android:textColor="@color/black"
-                        android:textSize="22sp"/>
+                        android:textSize="@dimen/text_size_title"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/walk_outline"
-                    android:paddingRight="5sp"/>
+                    android:paddingRight="5dp"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                         android:id="@+id/passiOb"
                         android:text="@string/passiOggi"
                         android:textColor="@color/black"
-                        android:textSize="24sp"/>
+                        android:textSize="@dimen/text_size_headline"/>
 
                     <TextView
                         android:id="@+id/obiettivoOb"
@@ -82,20 +82,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kmEtichetta"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_size_body"
                     android:drawableLeft="@drawable/route_outline"
-                    android:drawablePadding="2sp"
+                    android:drawablePadding="2dp"
                     android:textColor="@color/black"
-                    android:paddingBottom="5sp"/>
+                    android:paddingBottom="5dp"/>
                 <TextView
                     android:id="@+id/kcalOb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kcalEtichetta"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_size_body"
                     android:textColor="@color/black"
                     android:drawableLeft="@drawable/fire_outline"
-                    android:drawablePadding="2sp"/>
+                    android:drawablePadding="2dp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -110,7 +110,7 @@
                     android:src="@drawable/check_circle"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
-                    android:paddingLeft="15sp"
+                    android:paddingLeft="15dp"
                     android:gravity="end"/>
             </LinearLayout>
         </LinearLayout>

@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.example.passi.core.data.Database
 import com.example.passi.R
 import com.example.passi.SharedViewModel
+import com.example.passi.core.data.AppDatabase
+import com.example.passi.core.data.StepRepository
+import kotlinx.coroutines.launch
 
 class GoalsFragment : Fragment() {
 
@@ -25,14 +28,17 @@ class GoalsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_goals, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val repository  = StepRepository(AppDatabase.getInstance(requireContext()).stepDao())
 
-        val recyclerView: RecyclerView = requireView().findViewById(R.id.lista_giorni)
-        val db = Database(requireContext())
-        val goalsList = db.getGoalRows()
-        goalsList.reverse()
-        recyclerView.adapter = GoalsAdapter(goalsList)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val recyclerView: RecyclerView = requireView().findViewById(R.id.lista_giorni)
+            val goalsList = repository.getGoalRows()
+            goalsList.reverse()
+            recyclerView.adapter = GoalsAdapter(goalsList)
+        }
     }
 
 }

@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-import com.example.passi.core.data.Database
+import androidx.lifecycle.lifecycleScope
 import com.example.passi.R
+import com.example.passi.core.data.AppDatabase
+import com.example.passi.core.data.StepRepository
+import kotlinx.coroutines.launch
 
 class StatsFragment : Fragment() {
 
@@ -26,17 +29,25 @@ class StatsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val db = Database(requireContext())
-        view.findViewById<TextView>(R.id.mediaPassiSettimana).text = db.totalWeeklySteps().toString()
-        view.findViewById<TextView>(R.id.mediaPassiMese).text = db.totalMonthlySteps().toString()
-        view.findViewById<TextView>(R.id.obiettiviRaggiunti).text = db.goalsReached().toString()
+        val repository  = StepRepository(AppDatabase.getInstance(requireContext()).stepDao())
 
-        var days = mutableListOf<Int>()
-        days = db!!.getWeekSteps() //per riempire la lista dei valori da mettere nel grafico
-        val mainLayout: FrameLayout = view.findViewById(R.id.frame)
-        val histogramView = HistogramView(requireContext(), days)
-        mainLayout.addView(histogramView)
+
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            view.findViewById<TextView>(R.id.mediaPassiSettimana).text =
+                repository.totalWeeklySteps().toString()
+            view.findViewById<TextView>(R.id.mediaPassiMese).text =
+                repository.totalMonthlySteps().toString()
+            view.findViewById<TextView>(R.id.obiettiviRaggiunti).text =
+                repository.goalsReached().toString()
+
+            var days = mutableListOf<Int>()
+            days =
+                repository.getWeekSteps() //per riempire la lista dei valori da mettere nel grafico
+            val mainLayout: FrameLayout = view.findViewById(R.id.frame)
+            val histogramView = HistogramView(requireContext(), days)
+            mainLayout.addView(histogramView)
+        }
     }
 
 }
