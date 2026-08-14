@@ -11,15 +11,12 @@ object ValoriAttuali {
     var obiettivo : Int = 0
     var altezza : Int = 0
 
-    fun initialize(context: Context){
-        val db = Database(context)
-        db.open()
-        val formatoData = SimpleDateFormat("yyyyMMdd")
-        val chiave = formatoData.format(data)
-        if(!db.contains(chiave)){
-            db.inserisciTuplaSteps(0,0,0)
-        }
-        val valori = db.getValuesFromKey(chiave)
+    suspend fun initialize(context: Context){
+        val repository = StepRepository(AppDatabase.getInstance(context).stepDao())
+        val chiave = SimpleDateFormat("yyyyMMdd").format(data)
+        if(!repository.contains(chiave)) repository.inserisciTuplaSteps(0,0,0)
+
+        val valori = repository.getValueFromKey(chiave)
         passi = valori[0]
         obiettivo = valori[1]
         altezza = valori[2]

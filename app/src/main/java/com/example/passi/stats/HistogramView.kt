@@ -5,14 +5,12 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.view.View
-import com.example.passi.core.data.Database
+import com.example.passi.core.data.StepRepository
 import java.time.LocalDate
 
 class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
 
     private var data: MutableList<Int> = mutableListOf()
-
-
 
     init {
         setValue(passi)
@@ -100,7 +98,7 @@ class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
         val textOffset = 60f
         val valueOffset = 20f
 
-        val lineY = viewHeight - (Database.default_goal / maxHeight * barMaxHeight) - axisHeight
+        val lineY = viewHeight - (StepRepository.default_goal / maxHeight * barMaxHeight) - axisHeight
         val linePaint = Paint()
         linePaint.color = Color.parseColor("#00bb2d")
         linePaint.strokeWidth = 5f

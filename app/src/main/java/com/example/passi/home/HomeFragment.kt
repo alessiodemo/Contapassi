@@ -11,12 +11,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.passi.core.data.Database
 import com.example.passi.core.location.LocationProvider
 import com.example.passi.MainActivity
 import com.example.passi.R
 import com.example.passi.SharedViewModel
+import com.example.passi.core.data.AppDatabase
+import com.example.passi.core.data.StepRepository
 import com.example.passi.core.utility.Utility
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -41,26 +45,34 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //richiama il database
-        val db = Database(requireContext())
+        val repository  = StepRepository(AppDatabase.getInstance(requireContext()).stepDao())
 
         //crea l'observer che aggiorna l'interfaccia
         val obs = Observer<Boolean> { valori ->
-            //aggiorna la data
-            view.findViewById<TextView>(R.id.giorno).text = ut.dataSGMA(ut.getDataOggi())
-            //recupera i passi dal database e aggiornali
-            val key = db.formatKey(ut.getDataOggi())
-            val valoriPassi = db.getValuesFromKey(key)
-            view.findViewById<TextView>(R.id.passiOggi).text = valoriPassi[0].toString()
-            view.findViewById<TextView>(R.id.passiObiettivo).text = "/" + valoriPassi[1].toString()
-            view.findViewById<ProgressBar>(R.id.passiProgress).setProgress(ut.getProgress(valoriPassi[0], valoriPassi[1]), true)
-            view.findViewById<TextView>(R.id.calorieTesto).text = ut.getCalories(valoriPassi[0]) + " kcal"
-            view.findViewById<TextView>(R.id.kmTesto).text = ut.getDistance(valoriPassi[0], valoriPassi[2]) + " km"
-            view.findViewById<ProgressBar>(R.id.OMSProgress).setProgress(ut.getProgress(valoriPassi[0], 10000), true)
+            viewLifecycleOwner.lifecycleScope.launch {
+                //aggiorna la data
+                view.findViewById<TextView>(R.id.giorno).text = ut.dataSGMA(ut.getDataOggi())
+                //recupera i passi dal database e aggiornali
+                val key = repository.formatKey(ut.getDataOggi())
+                val valoriPassi = repository.getValueFromKey(key)
+                view.findViewById<TextView>(R.id.passiOggi).text = valoriPassi[0].toString()
+                view.findViewById<TextView>(R.id.passiObiettivo).text =
+                    "/" + valoriPassi[1].toString()
+                view.findViewById<ProgressBar>(R.id.passiProgress)
+                    .setProgress(ut.getProgress(valoriPassi[0], valoriPassi[1]), true)
+                view.findViewById<TextView>(R.id.calorieTesto).text =
+                    ut.getCalories(valoriPassi[0]) + " kcal"
+                view.findViewById<TextView>(R.id.kmTesto).text =
+                    ut.getDistance(valoriPassi[0], valoriPassi[2]) + " km"
+                view.findViewById<ProgressBar>(R.id.OMSProgress)
+                    .setProgress(ut.getProgress(valoriPassi[0], 10000), true)
 
-            if(ut.getProgress(valoriPassi[0], 10000) >= 100){
-                view.findViewById<TextView>(R.id.OMS).text = "Complimenti! Un altro passo verso una vita più sana :)"
-                view.findViewById<TextView>(R.id.OMS).textSize = 18F
-                view.findViewById<TextView>(R.id.OMS).setTextColor(Color.parseColor("#E64E1B"))
+                if (ut.getProgress(valoriPassi[0], 10000) >= 100) {
+                    view.findViewById<TextView>(R.id.OMS).text =
+                        "Complimenti! Un altro passo verso una vita più sana :)"
+                    view.findViewById<TextView>(R.id.OMS).textSize = 18F
+                    view.findViewById<TextView>(R.id.OMS).setTextColor(Color.parseColor("#E64E1B"))
+                }
             }
         }
 
@@ -82,8 +94,6 @@ class HomeFragment : Fragment() {
 
         //attiva la prima modifica
         model.setMeteo(true)
-
-
 
         startRepeatedTask()
     }

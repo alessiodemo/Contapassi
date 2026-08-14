@@ -23,12 +23,22 @@ import androidx.core.app.NotificationCompat
 import com.example.passi.BuildConfig
 import com.example.passi.MainActivity
 import com.example.passi.R
+import com.example.passi.core.data.AppDatabase
 import com.example.passi.core.data.Database
+import com.example.passi.core.data.StepRepository
 import com.example.passi.core.utility.Utility
 import com.example.passi.core.widget.StepsWidget
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class ForegroundService: Service(), SensorEventListener {
 
+    private val serviceScope = CoroutineScope(SupervisorJob() +
+            Dispatchers.IO)
+    private lateinit var repository: StepRepository
     private var sensorManager: SensorManager? = null
     private lateinit var context: Context
 
@@ -38,6 +48,7 @@ class ForegroundService: Service(), SensorEventListener {
 
     override fun onCreate() {
         super.onCreate()
+        repository = StepRepository(AppDatabase.getInstance(this).stepDao())
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         context = this
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
@@ -48,16 +59,15 @@ class ForegroundService: Service(), SensorEventListener {
         }
     }
 
-    fun updateWidget(){
+    suspend fun updateWidget(){
         val ut = Utility()
         val meteo = ut.loadData(context, "meteo").toInt().toString()
         val temperatura = ut.loadData(context, "temperatura").toString()
-        val db = Database(context)
-        val key = db.formatKey(ut.getDataOggi())
-        val valori = db.getValuesFromKey(key)
-        val passiSettimana = db.totalWeeklySteps().toString()
-        val passiMese = db.totalMonthlySteps().toString()
-        val obiettivi = db.goalsReached().toString()
+        val key = repository.formatKey(ut.getDataOggi())
+        val valori = repository.getValueFromKey(key)
+        val passiSettimana = repository.totalWeeklySteps().toString()
+        val passiMese = repository.totalMonthlySteps().toString()
+        val obiettivi = repository.goalsReached().toString()
         val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
         val stepsWidgetIds = appWidgetManager.getAppWidgetIds(
             ComponentName(
@@ -145,22 +155,23 @@ class ForegroundService: Service(), SensorEventListener {
 
 
     override fun onSensorChanged(event: SensorEvent?) {
-        //prepara il database
-        val ut = Utility()
-        val db = Database(context)
-        val key = db.formatKey(ut.getDataOggi())
-        val previousDbSteps = db.getValuesFromKey(key)[0]
-        val previousSteps = ut.loadData(this, "passiPr").toInt()
         val sensorSteps = event!!.values[0].toInt()
-        if(sensorSteps >= previousSteps) {
-            if(previousSteps != 0){
-                db.updateSteps(key, previousDbSteps + (sensorSteps - previousSteps))
+        serviceScope.launch {
+            //prepara il database
+            val ut = Utility()
+            val key = repository.formatKey(ut.getDataOggi())
+            val previousDbSteps = repository.getValueFromKey(key)[0]
+            val previousSteps = ut.loadData(this@ForegroundService, "passiPr").toInt()
+            if(sensorSteps >= previousSteps) {
+                if(previousSteps != 0){
+                    repository.updateSteps(key, previousDbSteps + (sensorSteps - previousSteps))
+                }
+            } else {
+                repository.updateSteps(key, previousDbSteps + sensorSteps)
             }
-        } else {
-            db.updateSteps(key, previousDbSteps + sensorSteps)
+            ut.saveData(this@ForegroundService, "passiPr", sensorSteps.toFloat())
+            updateWidget()
         }
-        ut.saveData(this, "passiPr", sensorSteps.toFloat())
-        updateWidget()
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
@@ -227,5 +238,10 @@ class ForegroundService: Service(), SensorEventListener {
             builder.color = resources.getColor(R.color.black)
             notification = builder.build()
             startForeground(mNotificationId, notification)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        serviceScope.cancel()
     }
 }
