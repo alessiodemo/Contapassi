@@ -3,22 +3,20 @@ package com.example.passi.home
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.example.passi.Database
-import com.example.passi.Location
+import com.example.passi.core.data.Database
+import com.example.passi.core.location.LocationProvider
 import com.example.passi.MainActivity
 import com.example.passi.R
 import com.example.passi.SharedViewModel
-import com.example.passi.Utility
+import com.example.passi.core.utility.Utility
 
 
 class HomeFragment : Fragment() {
@@ -75,7 +73,7 @@ class HomeFragment : Fragment() {
         //crea l'observer che aggiorna l'interfaccia meteo
         val obsMeteo = Observer<Boolean> { valori ->
             //richiedi la posizione e il meteo
-            val loc = Location((activity as MainActivity?)!!)
+            val loc = LocationProvider((activity as MainActivity?)!!)
             loc.acquirePosition(requireContext(),view.findViewById(R.id.meteoTesto),view.findViewById(R.id.meteoIcona))
         }
 

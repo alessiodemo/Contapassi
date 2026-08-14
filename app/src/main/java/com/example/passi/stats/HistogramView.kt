@@ -1,14 +1,12 @@
-package com.example.passi
+package com.example.passi.stats
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.view.View
-import java.time.DayOfWeek
+import com.example.passi.core.data.Database
 import java.time.LocalDate
-import java.util.Calendar
-import java.util.Collections
 
 class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
 

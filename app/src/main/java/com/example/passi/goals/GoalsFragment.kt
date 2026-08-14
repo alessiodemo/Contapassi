@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.example.passi.Database
+import com.example.passi.core.data.Database
 import com.example.passi.R
 import com.example.passi.SharedViewModel
-import com.example.passi.entities.GoalRow
-import java.util.*
 
 class GoalsFragment : Fragment() {
 

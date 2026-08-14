@@ -1,9 +1,7 @@
-package com.example.passi.entities
+package com.example.passi.core.data
 import android.content.Context
-import com.example.passi.Utility
-import com.example.passi.Database
+import com.example.passi.core.utility.Utility
 import java.text.SimpleDateFormat
-import java.util.Date
 
 
 object ValoriAttuali {

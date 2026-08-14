@@ -1,10 +1,11 @@
-package com.example.passi
+package com.example.passi.core.weather
 
 import android.content.Context
 import android.os.AsyncTask
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.viewModels
+import com.example.passi.R
+import com.example.passi.core.utility.Utility
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.IOException
@@ -67,7 +68,8 @@ class HttpWeatherRequest(c: Context, t: TextView?, w: ImageView?) : AsyncTask<St
                 "0","1" -> weath.setImageResource(R.drawable.sunny)
                 "2","3" -> weath.setImageResource(R.drawable.cloudy)
                 "45", "48" -> weath.setImageResource(R.drawable.foggy)
-                "51", "53", "55", "56", "57", "61", "63", "65", "66", "67", "80", "81", "82", "95", "96", "99" -> weath.setImageResource(R.drawable.rain)
+                "51", "53", "55", "56", "57", "61", "63", "65", "66", "67", "80", "81", "82", "95", "96", "99" -> weath.setImageResource(
+                    R.drawable.rain)
                 "71", "73", "75", "77", "85", "86" -> weath.setImageResource(R.drawable.snow)
                 else -> weath.setImageResource(R.drawable.no_meteo)
             }

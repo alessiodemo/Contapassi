@@ -1,8 +1,7 @@
-package com.example.passi.entities
+package com.example.passi.core.data
 
 import java.util.*
-import com.example.passi.Utility
-import java.text.DecimalFormat
+import com.example.passi.core.utility.Utility
 
 val ut = Utility()
 

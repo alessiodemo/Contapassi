@@ -1,26 +1,23 @@
-package com.example.passi
-
+package com.example.passi.core.location
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
-import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Looper
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
+import com.example.passi.core.weather.HttpWeatherRequest
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.Task
-import java.util.*
+import java.util.ArrayList
+import java.util.Collections
 
-class Location(private val activity: AppCompatActivity) {
+class LocationProvider(private val activity: AppCompatActivity) {
     private val locationRequest: LocationRequest = createLocationRequest()
     val coordinates: MutableList<Double> = Collections.synchronizedList(ArrayList())
 

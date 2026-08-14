@@ -16,11 +16,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.passi.BuildConfig
-import com.example.passi.Database
-import com.example.passi.ForegroundService
+import com.example.passi.core.data.Database
+import com.example.passi.core.service.ForegroundService
 import com.example.passi.R
 import com.example.passi.SharedViewModel
-import com.example.passi.Utility
+import com.example.passi.core.utility.Utility
 
 class SettingsFragment : Fragment() {
 

@@ -1,5 +1,4 @@
-package com.example.passi
-
+package com.example.passi.core.widget
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
@@ -12,12 +11,10 @@ import android.util.ArrayMap
 import android.util.SizeF
 import android.view.View
 import android.widget.RemoteViews
-import android.widget.RemoteViews.RemoteView
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.viewModels
+import com.example.passi.R
 
-
-class Widget : AppWidgetProvider() {
+class StepsWidget : AppWidgetProvider() {
     @RequiresApi(api = Build.VERSION_CODES.S)
     @SuppressLint("RemoteViewLayout")
     override fun onUpdate(
@@ -54,14 +51,14 @@ class Widget : AppWidgetProvider() {
 
 
             // Creazione dell'intent per l'azione onClick del pulsante passiKm
-            var intent = Intent(context, Widget::class.java)
+            var intent = Intent(context, StepsWidget::class.java)
             intent.action = "com.example.PASSI_KM"
             var pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             var views = RemoteViews(context.packageName, R.layout.widget_layout_small1)
             views.setOnClickPendingIntent(R.id.widgetButtonPassi, pendingIntent)
             appWidgetManager.updateAppWidget(appWidgetIds, views)
 
-            intent = Intent(context, Widget::class.java)
+            intent = Intent(context, StepsWidget::class.java)
             intent.action = "com.example.KM_PASSI"
             pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             views = RemoteViews(context.packageName, R.layout.widget_layout_small1)

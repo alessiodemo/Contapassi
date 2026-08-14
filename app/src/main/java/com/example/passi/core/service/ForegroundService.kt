@@ -1,6 +1,5 @@
-package com.example.passi
+package com.example.passi.core.service
 
-import android.app.ActivityManager
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationChannelGroup
@@ -17,18 +16,16 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Build
 import android.os.IBinder
-import android.util.Log
 import android.widget.RemoteViews
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.example.passi.home.HomeFragment
-import com.example.passi.settings.SettingsFragment
-
+import com.example.passi.BuildConfig
+import com.example.passi.MainActivity
+import com.example.passi.R
+import com.example.passi.core.data.Database
+import com.example.passi.core.utility.Utility
+import com.example.passi.core.widget.StepsWidget
 
 class ForegroundService: Service(), SensorEventListener {
 
@@ -41,7 +38,7 @@ class ForegroundService: Service(), SensorEventListener {
 
     override fun onCreate() {
         super.onCreate()
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         context = this
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         if (stepSensor == null) {
@@ -62,8 +59,13 @@ class ForegroundService: Service(), SensorEventListener {
         val passiMese = db.totalMonthlySteps().toString()
         val obiettivi = db.goalsReached().toString()
         val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
-        val widgetIds = appWidgetManager.getAppWidgetIds(ComponentName(applicationContext, Widget::class.java))
-        for (widgetId in widgetIds) {
+        val stepsWidgetIds = appWidgetManager.getAppWidgetIds(
+            ComponentName(
+                applicationContext,
+                StepsWidget::class.java
+            )
+        )
+        for (widgetId in stepsWidgetIds) {
             //small
             val remoteViewsSmall = RemoteViews(packageName, R.layout.widget_layout_small)
             remoteViewsSmall.setTextViewText(R.id.textView, valori[0].toString())
@@ -84,12 +86,24 @@ class ForegroundService: Service(), SensorEventListener {
             remoteViewsNormal.setTextViewText(R.id.textView6, ut.getCalories(valori[0]))
             remoteViewsNormal.setTextViewText(R.id.textView7, temperatura+" °C" )
             when(meteo){
-                "0","1" -> remoteViewsNormal.setTextViewCompoundDrawables(R.id.textView7,R.drawable.sunny,0,0,0)
-                "2","3" -> remoteViewsNormal.setTextViewCompoundDrawables(R.id.textView7,R.drawable.cloudy,0,0,0)
-                "45", "48" -> remoteViewsNormal.setTextViewCompoundDrawables(R.id.textView7,R.drawable.foggy,0,0,0)
-                "51", "53", "55", "56", "57", "61", "63", "65", "66", "67", "80", "81", "82", "95", "96", "99" -> remoteViewsNormal.setTextViewCompoundDrawables(R.id.textView7,R.drawable.rain,0,0,0)
-                "71", "73", "75", "77", "85", "86" -> remoteViewsNormal.setTextViewCompoundDrawables(R.id.textView7,R.drawable.snow,0,0,0)
-                else -> remoteViewsNormal.setTextViewCompoundDrawables(R.id.textView7,R.drawable.no_meteo,0,0,0)
+                "0","1" -> remoteViewsNormal.setTextViewCompoundDrawables(
+                    R.id.textView7,
+                    R.drawable.sunny,0,0,0)
+                "2","3" -> remoteViewsNormal.setTextViewCompoundDrawables(
+                    R.id.textView7,
+                    R.drawable.cloudy,0,0,0)
+                "45", "48" -> remoteViewsNormal.setTextViewCompoundDrawables(
+                    R.id.textView7,
+                    R.drawable.foggy,0,0,0)
+                "51", "53", "55", "56", "57", "61", "63", "65", "66", "67", "80", "81", "82", "95", "96", "99" -> remoteViewsNormal.setTextViewCompoundDrawables(
+                    R.id.textView7,
+                    R.drawable.rain,0,0,0)
+                "71", "73", "75", "77", "85", "86" -> remoteViewsNormal.setTextViewCompoundDrawables(
+                    R.id.textView7,
+                    R.drawable.snow,0,0,0)
+                else -> remoteViewsNormal.setTextViewCompoundDrawables(
+                    R.id.textView7,
+                    R.drawable.no_meteo,0,0,0)
             }
             appWidgetManager.updateAppWidget(widgetId, remoteViewsNormal)
             //large
@@ -98,12 +112,24 @@ class ForegroundService: Service(), SensorEventListener {
             remoteViewsLarge.setTextViewText(R.id.textView9, ut.getCalories(valori[0]))
             remoteViewsLarge.setTextViewText(R.id.textView10, temperatura+" °C" )
             when(meteo){
-                "0","1" -> remoteViewsLarge.setTextViewCompoundDrawables(R.id.textView10,R.drawable.sunny,0,0,0)
-                "2","3" -> remoteViewsLarge.setTextViewCompoundDrawables(R.id.textView10,R.drawable.cloudy,0,0,0)
-                "45", "48" -> remoteViewsLarge.setTextViewCompoundDrawables(R.id.textView10,R.drawable.foggy,0,0,0)
-                "51", "53", "55", "56", "57", "61", "63", "65", "66", "67", "80", "81", "82", "95", "96", "99" -> remoteViewsLarge.setTextViewCompoundDrawables(R.id.textView10,R.drawable.rain,0,0,0)
-                "71", "73", "75", "77", "85", "86" -> remoteViewsLarge.setTextViewCompoundDrawables(R.id.textView10,R.drawable.snow,0,0,0)
-                else -> remoteViewsLarge.setTextViewCompoundDrawables(R.id.textView10,R.drawable.no_meteo,0,0,0)
+                "0","1" -> remoteViewsLarge.setTextViewCompoundDrawables(
+                    R.id.textView10,
+                    R.drawable.sunny,0,0,0)
+                "2","3" -> remoteViewsLarge.setTextViewCompoundDrawables(
+                    R.id.textView10,
+                    R.drawable.cloudy,0,0,0)
+                "45", "48" -> remoteViewsLarge.setTextViewCompoundDrawables(
+                    R.id.textView10,
+                    R.drawable.foggy,0,0,0)
+                "51", "53", "55", "56", "57", "61", "63", "65", "66", "67", "80", "81", "82", "95", "96", "99" -> remoteViewsLarge.setTextViewCompoundDrawables(
+                    R.id.textView10,
+                    R.drawable.rain,0,0,0)
+                "71", "73", "75", "77", "85", "86" -> remoteViewsLarge.setTextViewCompoundDrawables(
+                    R.id.textView10,
+                    R.drawable.snow,0,0,0)
+                else -> remoteViewsLarge.setTextViewCompoundDrawables(
+                    R.id.textView10,
+                    R.drawable.no_meteo,0,0,0)
             }
             remoteViewsLarge.setTextViewText(R.id.mediaPassiSettimana, passiSettimana)
             remoteViewsLarge.setTextViewText(R.id.mediaPassiMese, passiMese)
@@ -164,7 +190,7 @@ class ForegroundService: Service(), SensorEventListener {
             iconNotification = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
             if (mNotificationManager == null) {
                 mNotificationManager =
-                    this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             }
             assert(mNotificationManager != null)
             mNotificationManager?.createNotificationChannelGroup(

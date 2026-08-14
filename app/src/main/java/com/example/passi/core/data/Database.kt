@@ -1,4 +1,4 @@
-package com.example.passi
+package com.example.passi.core.data
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,14 +7,12 @@ import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import com.example.passi.entities.GoalRow
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-
 
 class Database(context: Context) {
     companion object {
@@ -459,7 +457,7 @@ class Database(context: Context) {
         if (c.moveToFirst()) {
             do {
                 val b = getValuesFromKey(c.getString(0))
-                val newRow = keyToDate(c.getString(0))?.let { GoalRow(it,b[0],b[1],b[2]) }
+                val newRow = keyToDate(c.getString(0))?.let { GoalRow(it, b[0], b[1], b[2]) }
                 if (newRow != null) {
                     a.add(newRow)
                 }
@@ -499,4 +497,3 @@ class Database(context: Context) {
         }
     }
 }
-
