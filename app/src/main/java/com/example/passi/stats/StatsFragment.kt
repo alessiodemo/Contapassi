@@ -6,7 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.fragment.app.viewModels
+import com.example.passi.Database
+import com.example.passi.HistogramView
 import com.example.passi.R
+import com.example.passi.SharedViewModel
 
 class StatsFragment : Fragment() {
 
@@ -14,7 +21,7 @@ class StatsFragment : Fragment() {
         fun newInstance() = StatsFragment()
     }
 
-    private lateinit var viewModel: StatsViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,10 +30,18 @@ class StatsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_stats, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(StatsViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val db = Database(requireContext())
+        view.findViewById<TextView>(R.id.mediaPassiSettimana).text = db.totalWeeklySteps().toString()
+        view.findViewById<TextView>(R.id.mediaPassiMese).text = db.totalMonthlySteps().toString()
+        view.findViewById<TextView>(R.id.obiettiviRaggiunti).text = db.goalsReached().toString()
+
+        var days = mutableListOf<Int>()
+        days = db!!.getWeekSteps() //per riempire la lista dei valori da mettere nel grafico
+        val mainLayout: FrameLayout = view.findViewById(R.id.frame)
+        val histogramView = HistogramView(requireContext(), days)
+        mainLayout.addView(histogramView)
     }
 
 }

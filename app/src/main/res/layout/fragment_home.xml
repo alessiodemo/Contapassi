@@ -30,7 +30,7 @@
                 android:layout_height="300dp"
                 android:layout_centerInParent="true"
                 android:indeterminateOnly="false"
-                android:progress="80"
+                android:progress="0"
                 android:progressDrawable="@drawable/circular_progress" />
 
             <LinearLayout
@@ -82,7 +82,7 @@
                     android:id="@+id/meteoIcona"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/sunny"
+                    android:src="@drawable/no_meteo"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:padding="10sp"/>
@@ -148,16 +148,18 @@
         </LinearLayout>
 
         <ProgressBar
+            android:id="@+id/OMSProgress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="100"
-            android:progress="20"
+            android:progress="0"
             style="?android:attr/progressBarStyleHorizontal"
             android:progressDrawable="@drawable/linear_progress"
             android:layout_marginHorizontal="20sp"
             android:layout_marginTop="30sp"/>
 
         <TextView
+            android:id="@+id/OMS"
             android:layout_marginHorizontal="20sp"
             android:layout_marginVertical="10sp"
             android:textAlignment="center"

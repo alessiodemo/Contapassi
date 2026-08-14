@@ -14,8 +14,7 @@
         android:drawablePadding="2sp"
         android:gravity="center"
         android:text="@string/passi"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:textStyle="bold|italic"
         android:typeface="normal" />
 
@@ -32,7 +31,6 @@
             android:layout_weight="1"
             android:drawableLeft="@drawable/fire"
             android:text="@string/calorie"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp"
             android:gravity="center"
             android:layout_marginRight="-110dp" />
@@ -46,21 +44,87 @@
             android:drawableLeft="@drawable/sunny"
             android:text="@string/meteoSole"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
 
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView11"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Statistiche"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="20sp"/>
+        android:textSize="20sp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settimana"/>
+            <TextView
+                android:id="@+id/mediaPassiSettimana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/passiOggi"
+                android:textSize="20sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/mediaKmSettimana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/km"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mese"/>
+            <TextView
+                android:id="@+id/mediaPassiMese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/passiOggi"
+                android:textSize="20sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/mediaKmMese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/km"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/obiettivi"/>
+            <TextView
+                android:id="@+id/obiettiviRaggiunti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/passiOggi"
+                android:textSize="20sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/obiettiviTotali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/obiettiviTot"/>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -5,7 +5,7 @@
     android:background="@color/light_black">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="89dp"
         android:layout_weight="2"
@@ -15,14 +15,36 @@
         android:gravity="center"
         android:text="@string/passi"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="28sp"
         android:textStyle="bold|italic" />
+    <TextView
+        android:id="@+id/km"
+        android:layout_width="0dp"
+        android:layout_height="89dp"
+        android:layout_weight="2"
+        android:contentDescription="@string/appwidget_text"
+        android:drawableLeft="@drawable/walk_black"
+        android:drawablePadding="2sp"
+        android:gravity="center"
+        android:text="@string/passi"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:textStyle="bold|italic"
+        android:visibility="gone"/>
 
     <ImageButton
-        android:id="@+id/button"
+        android:id="@+id/widgetButtonPassi"
+        android:layout_width="0dp"
+        android:layout_height="89dp"
+        android:layout_weight="1"
+        android:src="@drawable/walk_black"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:id="@+id/widgetButtonKm"
         android:layout_width="0dp"
         android:layout_height="89dp"
         android:layout_weight="1"
         android:src="@drawable/walk_black" />
+
 </LinearLayout>

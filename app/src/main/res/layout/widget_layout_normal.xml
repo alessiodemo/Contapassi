@@ -14,7 +14,6 @@
         android:drawablePadding="2sp"
         android:gravity="center"
         android:text="@string/passi"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="28sp"
         android:textStyle="bold|italic"
         android:typeface="normal" />
@@ -32,7 +31,6 @@
             android:layout_weight="1"
             android:drawableLeft="@drawable/fire"
             android:text="@string/calorie"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp"
             android:gravity="center"
             android:visibility="visible"
@@ -48,7 +46,6 @@
             android:text="@string/meteoSole"
             android:typeface="normal"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
 
     </LinearLayout>

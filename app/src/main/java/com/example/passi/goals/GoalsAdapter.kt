@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passi.R
-import com.example.passi.data.model.GoalRow
+import com.example.passi.entities.GoalRow
 
 
-class GoalsAdapter(private val goalsList: Array<GoalRow>) :
+class GoalsAdapter(private val goalsList: MutableList<GoalRow>) :
     RecyclerView.Adapter<GoalsAdapter.GoalsViewHolder>() {
 
     class GoalsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,8 +32,8 @@ class GoalsAdapter(private val goalsList: Array<GoalRow>) :
             } else {
                 goalsCheck.setImageResource(R.drawable.cancel_circle)
             }
-            goalsCalorie.text = row.kcal.toString()
-            goalsDistanza.text = row.distanza.toString()
+            goalsCalorie.text = row.kcal + " kcal"
+            goalsDistanza.text = row.distanza + "km"
         }
     }
 

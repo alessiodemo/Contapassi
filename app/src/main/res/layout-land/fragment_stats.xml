@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".stats.StatsFragment">
+    tools:context=".stats.StatsFragment"
+    android:id="@+id/frame">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/linear">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -16,7 +18,8 @@
             android:paddingHorizontal="30sp"
             android:paddingVertical="10sp"
             android:orientation="vertical"
-            android:background="@drawable/rounded_corners">
+            android:background="@drawable/rounded_corners"
+            android:gravity="center">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -38,9 +41,7 @@
                     android:id="@+id/mediaKmSettimana"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/km"
-                    android:textSize="16sp"
-                    android:textColor="@color/black" />
+                    android:text="@string/km"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -63,9 +64,7 @@
                     android:id="@+id/mediaKmMese"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/km"
-                    android:textSize="16sp"
-                    android:textColor="@color/black" />
+                    android:text="@string/km" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -88,9 +87,7 @@
                     android:id="@+id/obiettiviTotali"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/km"
-                    android:textSize="16sp"
-                    android:textColor="@color/black" />
+                    android:text="@string/obiettiviTot"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
