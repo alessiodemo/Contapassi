@@ -24,12 +24,12 @@
 
             <TextView
                 android:id="@+id/giorno"
-                style="@style/PassiText.Caption"
-                android:layout_width="wrap_content"
+                style="@style/PassiText.Caption.Fit"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:letterSpacing="0.08"
-                android:text="@string/data"
-                android:textAllCaps="true" />
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/space_m"
+                android:text="@string/data" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -48,32 +48,35 @@
 
                 <LinearLayout
                     android:id="@+id/passiOggiGroup"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/progress_ring_content_width"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/PassiText.Caption"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Caption.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:letterSpacing="0.08"
                         android:text="@string/passi"
                         android:textAllCaps="true" />
 
                     <TextView
                         android:id="@+id/passiOggi"
-                        style="@style/PassiText.Display"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Display.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/passiOggi" />
 
                     <TextView
                         android:id="@+id/passiObiettivo"
-                        style="@style/PassiText.Caption"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Caption.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/passiObiettivo" />
 
                 </LinearLayout>
@@ -133,7 +136,7 @@
 
                     <TextView
                         android:id="@+id/meteoTesto"
-                        style="@style/PassiText.Body"
+                        style="@style/PassiText.Body.Fit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_m"
@@ -159,7 +162,7 @@
 
                     <TextView
                         android:id="@+id/calorieTesto"
-                        style="@style/PassiText.Body"
+                        style="@style/PassiText.Body.Fit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_m"
@@ -186,7 +189,7 @@
 
                     <TextView
                         android:id="@+id/kmTesto"
-                        style="@style/PassiText.Body"
+                        style="@style/PassiText.Body.Fit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_m"

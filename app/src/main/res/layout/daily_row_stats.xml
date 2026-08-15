@@ -6,12 +6,15 @@
     android:layout_marginHorizontal="@dimen/space_m"
     android:layout_marginVertical="@dimen/space_s">
 
+    <!-- padding orizzontale piu' stretto di quello verticale: in una riga divisa in
+         quattro colonne ogni dp tolto ai bordi e' un dp guadagnato dal testo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/card_content_padding">
+        android:paddingHorizontal="@dimen/space_s"
+        android:paddingVertical="@dimen/card_content_padding">
 
         <!-- data -->
         <LinearLayout
@@ -24,15 +27,18 @@
             <TextView
                 android:id="@+id/giornoOb"
                 style="@style/PassiText.Title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/giorno" />
 
             <TextView
                 android:id="@+id/meseOb"
-                style="@style/PassiText.Caption"
-                android:layout_width="wrap_content"
+                style="@style/PassiText.Caption.Fit"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/meseOb"
                 android:textAllCaps="true" />
         </LinearLayout>
@@ -51,24 +57,29 @@
                 android:layout_marginEnd="@dimen/space_xs"
                 android:src="@drawable/walk_outline" />
 
+            <!-- 0dp + peso: il blocco di testo prende tutto lo spazio che resta dopo
+                 l'icona, ed e' proprio quel limite che permette al testo di adattarsi -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/passiOb"
-                    style="@style/PassiText.Headline"
-                    android:layout_width="wrap_content"
+                    style="@style/PassiText.Headline.Fit"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="@string/passiOggi" />
 
                 <TextView
                     android:id="@+id/obiettivoOb"
-                    style="@style/PassiText.Caption"
-                    android:layout_width="wrap_content"
+                    style="@style/PassiText.Caption.Fit"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="@string/suPassiOb" />
             </LinearLayout>
         </LinearLayout>
@@ -83,30 +94,32 @@
 
             <TextView
                 android:id="@+id/kmOb"
-                style="@style/PassiText.Body"
-                android:layout_width="wrap_content"
+                style="@style/PassiText.Body.Fit"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/route_outline"
                 android:drawablePadding="@dimen/space_xs"
+                android:gravity="center"
                 android:paddingBottom="@dimen/space_xs"
                 android:text="@string/kmEtichetta" />
 
             <TextView
                 android:id="@+id/kcalOb"
-                style="@style/PassiText.Body"
-                android:layout_width="wrap_content"
+                style="@style/PassiText.Body.Fit"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/fire_outline"
                 android:drawablePadding="@dimen/space_xs"
+                android:gravity="center"
                 android:text="@string/kcalEtichetta" />
         </LinearLayout>
 
-        <!-- esito obiettivo -->
+        <!-- esito obiettivo: larghezza fissa, non pesata, cosi' non ruba spazio ai testi -->
         <ImageView
             android:id="@+id/checkOb"
-            android:layout_width="0dp"
+            android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_weight="1"
+            android:layout_marginStart="@dimen/space_xs"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/check_circle" />

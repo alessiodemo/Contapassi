@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Il widget e' lo spazio piu' stretto in assoluto (puo' scendere a 130dp di larghezza
+  divisi in tre colonne). Qui NON si puo' usare app:autoSize* di AppCompat, perche' il
+  launcher inflaziona con un LayoutInflater normale: si usa android:autoSizeTextType,
+  che e' la versione di piattaforma, disponibile da API 26 (il nostro minSdk).
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,13 +17,17 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:autoSizeMaxTextSize="@dimen/text_size_headline"
+        android:autoSizeMinTextSize="@dimen/text_size_body"
+        android:autoSizeStepGranularity="1sp"
+        android:autoSizeTextType="uniform"
         android:drawableLeft="@drawable/walk_black"
         android:drawablePadding="6dp"
         android:drawableTint="@color/widget_accent"
         android:gravity="center"
+        android:maxLines="1"
         android:text="@string/passi"
         android:textColor="@color/widget_on_background"
-        android:textSize="@dimen/text_size_headline"
         android:textStyle="bold" />
 
     <!-- due colonne di uguale peso: al posto dei margini -110dp/+110dp -->
@@ -32,24 +42,32 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:autoSizeMaxTextSize="@dimen/text_size_subtitle"
+            android:autoSizeMinTextSize="@dimen/text_size_autosize_min"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
             android:drawableLeft="@drawable/fire"
             android:drawablePadding="4dp"
             android:gravity="center"
+            android:maxLines="1"
             android:text="@string/calorie"
-            android:textColor="@color/widget_on_background_variant"
-            android:textSize="@dimen/text_size_subtitle" />
+            android:textColor="@color/widget_on_background_variant" />
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:autoSizeMaxTextSize="@dimen/text_size_subtitle"
+            android:autoSizeMinTextSize="@dimen/text_size_autosize_min"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
             android:drawableLeft="@drawable/sunny"
             android:drawablePadding="4dp"
             android:gravity="center"
+            android:maxLines="1"
             android:text="@string/meteoSole"
-            android:textColor="@color/widget_on_background_variant"
-            android:textSize="@dimen/text_size_subtitle" />
+            android:textColor="@color/widget_on_background_variant" />
 
     </LinearLayout>
 
@@ -77,28 +95,43 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_caption"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/settimana"
-                android:textColor="@color/widget_on_background_variant"
-                android:textSize="@dimen/text_size_caption" />
+                android:textColor="@color/widget_on_background_variant" />
 
             <TextView
                 android:id="@+id/mediaPassiSettimana"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_subtitle"
+                android:autoSizeMinTextSize="@dimen/text_size_autosize_min"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/passiOggi"
                 android:textColor="@color/widget_on_background"
-                android:textSize="@dimen/text_size_subtitle"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/mediaKmSettimana"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_caption"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/kmEtichetta"
-                android:textColor="@color/widget_on_background_variant"
-                android:textSize="@dimen/text_size_caption" />
+                android:textColor="@color/widget_on_background_variant" />
         </LinearLayout>
 
         <LinearLayout
@@ -109,28 +142,43 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_caption"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/mese"
-                android:textColor="@color/widget_on_background_variant"
-                android:textSize="@dimen/text_size_caption" />
+                android:textColor="@color/widget_on_background_variant" />
 
             <TextView
                 android:id="@+id/mediaPassiMese"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_subtitle"
+                android:autoSizeMinTextSize="@dimen/text_size_autosize_min"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/passiOggi"
                 android:textColor="@color/widget_on_background"
-                android:textSize="@dimen/text_size_subtitle"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/mediaKmMese"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_caption"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/kmEtichetta"
-                android:textColor="@color/widget_on_background_variant"
-                android:textSize="@dimen/text_size_caption" />
+                android:textColor="@color/widget_on_background_variant" />
         </LinearLayout>
 
         <LinearLayout
@@ -141,28 +189,43 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_caption"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/obiettivi"
-                android:textColor="@color/widget_on_background_variant"
-                android:textSize="@dimen/text_size_caption" />
+                android:textColor="@color/widget_on_background_variant" />
 
             <TextView
                 android:id="@+id/obiettiviRaggiunti"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_subtitle"
+                android:autoSizeMinTextSize="@dimen/text_size_autosize_min"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/passiOggi"
                 android:textColor="@color/widget_accent"
-                android:textSize="@dimen/text_size_subtitle"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/obiettiviTotali"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_caption"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/obiettiviTot"
-                android:textColor="@color/widget_on_background_variant"
-                android:textSize="@dimen/text_size_caption" />
+                android:textColor="@color/widget_on_background_variant" />
         </LinearLayout>
     </LinearLayout>
 

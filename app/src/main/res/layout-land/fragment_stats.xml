@@ -38,9 +38,7 @@
                         style="@style/PassiText.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:letterSpacing="0.06"
-                        android:text="@string/settimana"
-                        android:textAllCaps="true" />
+                        android:text="@string/settimana" />
 
                     <TextView
                         android:id="@+id/mediaPassiSettimana"
@@ -70,9 +68,7 @@
                         style="@style/PassiText.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:letterSpacing="0.06"
-                        android:text="@string/mese"
-                        android:textAllCaps="true" />
+                        android:text="@string/mese" />
 
                     <TextView
                         android:id="@+id/mediaPassiMese"
@@ -102,9 +98,7 @@
                         style="@style/PassiText.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:letterSpacing="0.06"
-                        android:text="@string/obiettivi"
-                        android:textAllCaps="true" />
+                        android:text="@string/obiettivi" />
 
                     <TextView
                         android:id="@+id/obiettiviRaggiunti"

@@ -14,12 +14,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.passi.core.location.LocationProvider
-import com.example.passi.MainActivity
 import com.example.passi.R
 import com.example.passi.SharedViewModel
 import com.example.passi.core.data.AppDatabase
 import com.example.passi.core.data.StepRepository
 import com.example.passi.core.utility.Utility
+import com.example.passi.core.weather.HttpWeatherRequest
 import kotlinx.coroutines.launch
 
 
@@ -89,10 +89,19 @@ class HomeFragment : Fragment() {
         model.setData(true)
 
         //crea l'observer che aggiorna l'interfaccia meteo
-        val obsMeteo = Observer<Boolean> { valori ->
-            //richiedi la posizione e il meteo
-            val loc = LocationProvider((activity as MainActivity?)!!)
-            loc.acquirePosition(requireContext(),view.findViewById(R.id.meteoTesto),view.findViewById(R.id.meteoIcona))
+        val obsMeteo = Observer<Boolean> {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val pos = LocationProvider(requireContext()).getPosition()
+                    ?: return@launch
+                val url = "https://api.open-meteo.com/v1/forecast" +
+                        "?latitude=${pos.latitude}&longitude=${pos.longitude}" +
+                        "&hourly=temperature_2m,weathercode&forecast_days=1&timezone=auto"
+                HttpWeatherRequest(
+                    requireContext(),
+                    view.findViewById(R.id.meteoTesto),
+                    view.findViewById(R.id.meteoIcona)
+                ).execute(url)
+            }
         }
 
         //collega l'observer

@@ -50,10 +50,69 @@
         <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
     </style>
 
+
+    <!--
+      VARIANTI "Fit": testi che NON devono mai andare a capo.
+
+      Il problema che risolvono: dentro una colonna stretta (un terzo di card) una
+      TextView normale, non riuscendo a stare in larghezza, spezza la riga. Un valore
+      come "450 kcal" diventa "450" a capo "kcal": brutto e piu' difficile da leggere.
+
+      La soluzione NON e' rimpicciolire il testo ovunque a mano, ma dire alla TextView
+      di adattarsi: maxLines="1" vieta l'a capo e autoSizeTextType="uniform" fa
+      scegliere ad Android la dimensione piu' grande che ci sta, tra il minimo e il
+      valore nominale dello stile. Su schermi larghi resta la dimensione piena, su
+      quelli stretti si riduce quel tanto che basta.
+
+      Attenzione: perche' funzioni la TextView deve avere una larghezza LIMITATA
+      (match_parent dentro una colonna con peso, non wrap_content). Con wrap_content
+      la view chiede tutto lo spazio che le serve e non c'e' niente a cui adattarsi.
+    -->
+
     <!-- valore numerico dentro una card di statistica -->
     <style name="PassiText.Metric">
         <item name="android:textSize">@dimen/text_size_subtitle</item>
         <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:maxLines">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/text_size_autosize_min</item>
+        <item name="autoSizeMaxTextSize">@dimen/text_size_subtitle</item>
+        <item name="autoSizeStepGranularity">1sp</item>
+    </style>
+
+    <style name="PassiText.Body.Fit">
+        <item name="android:maxLines">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/text_size_autosize_min</item>
+        <item name="autoSizeMaxTextSize">@dimen/text_size_body</item>
+        <item name="autoSizeStepGranularity">1sp</item>
+    </style>
+
+    <!-- etichette: qui l'ellissi ha senso come ultima spiaggia, perche' troncare una
+         parola e' accettabile mentre troncare un numero sarebbe fuorviante -->
+    <style name="PassiText.Caption.Fit">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/text_size_autosize_min</item>
+        <item name="autoSizeMaxTextSize">@dimen/text_size_caption</item>
+        <item name="autoSizeStepGranularity">1sp</item>
+    </style>
+
+    <style name="PassiText.Headline.Fit">
+        <item name="android:maxLines">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/text_size_body</item>
+        <item name="autoSizeMaxTextSize">@dimen/text_size_headline</item>
+        <item name="autoSizeStepGranularity">1sp</item>
+    </style>
+
+    <style name="PassiText.Display.Fit">
+        <item name="android:maxLines">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/text_size_headline</item>
+        <item name="autoSizeMaxTextSize">@dimen/text_size_display</item>
+        <item name="autoSizeStepGranularity">1sp</item>
     </style>
 
 

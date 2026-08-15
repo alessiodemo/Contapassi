@@ -3,21 +3,49 @@ package com.example.passi.core.location
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.LocationManager
-import android.os.Looper
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import com.example.passi.core.weather.HttpWeatherRequest
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
+import android.annotation.SuppressLint
+import android.location.Location
+import androidx.core.content.ContextCompat
 import com.google.android.gms.location.LocationServices
-import java.util.ArrayList
-import java.util.Collections
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.tasks.await
 
-class LocationProvider(private val activity: AppCompatActivity) {
+class LocationProvider(private val context: Context) {
+
+     companion object {
+         private const val MAX_CACHE_AGE_MS = 30 * 60 * 1000L
+     }
+
+    fun hasPermission(): Boolean = ContextCompat.checkSelfPermission(
+        context,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+
+    @SuppressLint("MissingPermission")
+    suspend fun getPosition(): Location? {
+        if(!hasPermission()) return null
+        val fused = LocationServices.getFusedLocationProviderClient(context)
+        val cts = CancellationTokenSource()
+
+        return try {
+            val cached = fused.lastLocation.await()
+            if (cached != null && System.currentTimeMillis() - cached.time < MAX_CACHE_AGE_MS) {
+                    return cached
+            }
+
+            fused.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, cts.token).await()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            null
+        } finally {
+            cts.cancel()
+        }
+    }
+
+    /*
     private val locationRequest: LocationRequest = createLocationRequest()
     val coordinates: MutableList<Double> = Collections.synchronizedList(ArrayList())
 
@@ -97,5 +125,7 @@ class LocationProvider(private val activity: AppCompatActivity) {
     private fun checkLocalPermission(): Boolean {
         return ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
+    */
+
 
 }

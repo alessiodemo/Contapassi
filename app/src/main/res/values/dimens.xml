@@ -8,6 +8,9 @@
     <dimen name="text_size_subtitle">20sp</dimen>
     <dimen name="text_size_body">18sp</dimen>
     <dimen name="text_size_caption">15sp</dimen>
+    <!-- pavimento per il ridimensionamento automatico: sotto questa soglia il testo
+         diventa illeggibile, meglio troncare che rimpicciolire ancora -->
+    <dimen name="text_size_autosize_min">11sp</dimen>
 
     <!-- spaziature: in dp, NON scalano col font utente -->
     <dimen name="space_xs">4dp</dimen>
@@ -24,6 +27,9 @@
     <dimen name="progress_ring_thickness">22dp</dimen>
     <!-- il raggio non puo' superare meta' dello spessore: oltre, Material lo taglia -->
     <dimen name="progress_ring_corner">11dp</dimen>
+    <!-- larghezza utile dentro l'anello: da' un limite al testo centrale, senza il
+         quale il ridimensionamento automatico non avrebbe niente a cui adattarsi -->
+    <dimen name="progress_ring_content_width">170dp</dimen>
 
     <!-- widget: su Android 12+ questo valore viene sostituito dal raggio di sistema
          (values-v31), cosi' gli angoli combaciano con quelli degli altri widget -->

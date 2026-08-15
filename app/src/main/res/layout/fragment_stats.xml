@@ -13,6 +13,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!--
+          Tre colonne di uguale peso dentro una card: ognuna ha circa un terzo della
+          larghezza. E' lo spazio piu' stretto dell'app, quindi qui ogni testo usa una
+          variante "Fit" (una riga sola, dimensione adattiva) e nessuna etichetta e'
+          maiuscola: il maiuscolo costa circa il 15% di larghezza in piu' e su una
+          colonna cosi' stretta e' esattamente cio' che manda il testo a capo.
+        -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,32 +39,34 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/PassiText.Caption"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Caption.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:letterSpacing="0.06"
-                        android:text="@string/settimana"
-                        android:textAllCaps="true" />
+                        android:gravity="center"
+                        android:text="@string/settimana" />
 
                     <TextView
                         android:id="@+id/mediaPassiSettimana"
                         style="@style/PassiText.Metric"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_xs"
+                        android:gravity="center"
                         android:text="@string/passiOggi" />
 
                     <TextView
                         android:id="@+id/mediaKmSettimana"
-                        style="@style/PassiText.Caption"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Caption.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/km" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="@dimen/divider_height"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/space_xs"
                     android:background="?attr/colorOutlineVariant" />
 
                 <LinearLayout
@@ -68,32 +77,34 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/PassiText.Caption"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Caption.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:letterSpacing="0.06"
-                        android:text="@string/mese"
-                        android:textAllCaps="true" />
+                        android:gravity="center"
+                        android:text="@string/mese" />
 
                     <TextView
                         android:id="@+id/mediaPassiMese"
                         style="@style/PassiText.Metric"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_xs"
+                        android:gravity="center"
                         android:text="@string/passiOggi" />
 
                     <TextView
                         android:id="@+id/mediaKmMese"
-                        style="@style/PassiText.Caption"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Caption.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/km" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="@dimen/divider_height"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/space_xs"
                     android:background="?attr/colorOutlineVariant" />
 
                 <LinearLayout
@@ -104,26 +115,27 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/PassiText.Caption"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Caption.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:letterSpacing="0.06"
-                        android:text="@string/obiettivi"
-                        android:textAllCaps="true" />
+                        android:gravity="center"
+                        android:text="@string/obiettivi" />
 
                     <TextView
                         android:id="@+id/obiettiviRaggiunti"
                         style="@style/PassiText.Metric"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_xs"
+                        android:gravity="center"
                         android:text="@string/passiOggi" />
 
                     <TextView
                         android:id="@+id/obiettiviTotali"
-                        style="@style/PassiText.Caption"
-                        android:layout_width="wrap_content"
+                        style="@style/PassiText.Caption.Fit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/obiettiviTot" />
                 </LinearLayout>
             </LinearLayout>
