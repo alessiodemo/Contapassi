@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+      SCALA TIPOGRAFICA
+      Un layout non decide dimensione/peso/colore di un testo: dichiara il RUOLO che
+      quel testo ha, con style="@style/PassiText.Xxx".
+
+      Il punto nel nome NON e' decorativo: "PassiText.Title" eredita implicitamente da
+      "PassiText". Per questo la base definisce colore e famiglia una volta sola.
+      Non usiamo direttamente TextAppearance.Material3.* perche' quelle hanno le
+      dimensioni fisse, mentre le nostre passano da @dimen e quindi scalano su tablet.
+    -->
+    <style name="PassiText">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- il numero grande dei passi al centro dell'anello -->
+    <style name="PassiText.Display">
+        <item name="android:textSize">@dimen/text_size_display</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="PassiText.Headline">
+        <item name="android:textSize">@dimen/text_size_headline</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="PassiText.Title">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="PassiText.Subtitle">
+        <item name="android:textSize">@dimen/text_size_subtitle</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="PassiText.Body">
+        <item name="android:textSize">@dimen/text_size_body</item>
+    </style>
+
+    <!-- etichette e testi di supporto: piu' piccoli E in colore attenuato.
+         Sono i due segnali che creano la gerarchia visiva. -->
+    <style name="PassiText.Caption">
+        <item name="android:textSize">@dimen/text_size_caption</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <!-- valore numerico dentro una card di statistica -->
+    <style name="PassiText.Metric">
+        <item name="android:textSize">@dimen/text_size_subtitle</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+
+    <!--
+      COMPONENTI MATERIAL 3
+      Sono agganciati come default di sistema in themes.xml (materialCardViewStyle,
+      materialButtonStyle, ...): i layout non devono ripeterli.
+      Nessuno di questi stili nomina un colore fisso: usano solo ?attr/color*, ed e'
+      la condizione perche' i colori dinamici possano subentrare a runtime.
+    -->
+
+    <!-- In Material 3 una card non si stacca dallo sfondo con l'ombra ma con un
+         LIVELLO DI SUPERFICIE diverso: surfaceContainer e' un gradino sopra surface. -->
+    <style name="PassiCard" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">?attr/colorSurfaceContainer</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardUseCompatPadding">false</item>
+    </style>
+
+    <style name="PassiButton" parent="Widget.Material3.Button">
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:paddingStart">@dimen/space_l</item>
+        <item name="android:paddingEnd">@dimen/space_l</item>
+        <item name="iconGravity">textEnd</item>
+    </style>
+
+    <style name="PassiSwitch" parent="Widget.Material3.CompoundButton.MaterialSwitch" />
+
+    <style name="PassiBottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">?attr/colorSurfaceContainer</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <style name="PassiToolbar" parent="Widget.Material3.Toolbar.OnSurface">
+        <item name="titleTextAppearance">@style/PassiToolbarTitle</item>
+        <item name="android:background">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="PassiToolbarTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <!-- campi di testo: box con bordo, il pattern M3 per un form -->
+    <style name="PassiTextField" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/space_s</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/space_s</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/space_s</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/space_s</item>
+    </style>
+
+    <!-- indicatori di progresso M3: estremita' arrotondate e animazione integrata,
+         cose che il vecchio ProgressBar con drawable custom non aveva -->
+    <style name="PassiProgressRing" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="indicatorSize">@dimen/progress_ring_size</item>
+        <item name="trackThickness">@dimen/progress_ring_thickness</item>
+        <item name="trackCornerRadius">@dimen/progress_ring_corner</item>
+        <item name="indicatorColor">?attr/colorPrimary</item>
+        <item name="trackColor">?attr/colorSurfaceContainerHighest</item>
+    </style>
+
+    <style name="PassiProgressBar" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="trackThickness">10dp</item>
+        <item name="trackCornerRadius">5dp</item>
+        <item name="indicatorColor">?attr/colorPrimary</item>
+        <item name="trackColor">?attr/colorSurfaceContainerHighest</item>
+    </style>
+
+    <!-- separatore orizzontale -->
+    <style name="PassiDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/divider_height</item>
+        <item name="android:background">?attr/colorOutlineVariant</item>
+    </style>
+
+</resources>

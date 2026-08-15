@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  NOTA sui widget: sono inflazionati dal LAUNCHER, non dalla nostra Activity.
+  Un ?attr/colorSurface verrebbe risolto contro il tema del launcher, quindi qui
+  servono @color/ espliciti. Seguono comunque chiaro/scuro (values-night) e i
+  colori di sistema su Android 12+ (values-v31).
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_black">
+    android:background="@drawable/widget_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_padding">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="391dp"
-        android:layout_height="89dp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/appwidget_text"
         android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="2dp"
+        android:drawablePadding="6dp"
+        android:drawableTint="@color/widget_accent"
         android:gravity="center"
         android:text="@string/passi"
         android:textAlignment="center"
+        android:textColor="@color/widget_on_background"
         android:textSize="@dimen/text_size_widget_headline"
-        android:textStyle="bold|italic" />
-</RelativeLayout>
+        android:textStyle="bold" />
+</LinearLayout>

@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
     android:orientation="vertical"
-    android:background="@color/light_black">
+    android:padding="@dimen/widget_padding">
 
     <TextView
         android:id="@+id/textView5"
@@ -11,13 +12,17 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="2dp"
+        android:drawablePadding="6dp"
+        android:drawableTint="@color/widget_accent"
         android:gravity="center"
         android:text="@string/passi"
+        android:textColor="@color/widget_on_background"
         android:textSize="@dimen/text_size_widget_headline"
-        android:textStyle="bold|italic"
-        android:typeface="normal" />
+        android:textStyle="bold" />
 
+    <!-- due colonne di uguale peso: prima erano allineate con marginRight="-110dp"
+         su una e marginStart="110dp" sull'altra, due margini che si annullavano a
+         una sola larghezza di schermo e sballavano su tutte le altre -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -30,25 +35,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableLeft="@drawable/fire"
-            android:text="@string/calorie"
-            android:textSize="@dimen/text_size_subtitle"
+            android:drawablePadding="4dp"
             android:gravity="center"
-            android:visibility="visible"
-            android:layout_marginRight="-110dp" />
+            android:text="@string/calorie"
+            android:textColor="@color/widget_on_background_variant"
+            android:textSize="@dimen/text_size_subtitle" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginStart="110dp"
             android:drawableLeft="@drawable/sunny"
-            android:text="@string/meteoSole"
-            android:typeface="normal"
+            android:drawablePadding="4dp"
             android:gravity="center"
+            android:text="@string/meteoSole"
+            android:textColor="@color/widget_on_background_variant"
             android:textSize="@dimen/text_size_subtitle" />
 
     </LinearLayout>
-
 
 </LinearLayout>

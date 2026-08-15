@@ -1,13 +1,14 @@
 package com.example.passi.home
 
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.TextView
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -57,20 +58,26 @@ class HomeFragment : Fragment() {
                 view.findViewById<TextView>(R.id.passiOggi).text = valoriPassi[0].toString()
                 view.findViewById<TextView>(R.id.passiObiettivo).text =
                     "/" + valoriPassi[1].toString()
-                view.findViewById<ProgressBar>(R.id.passiProgress)
-                    .setProgress(ut.getProgress(valoriPassi[0], valoriPassi[1]), true)
+                // setProgressCompat e' l'equivalente Material di setProgress(valore, true):
+                // anima la transizione usando le animazioni dell'indicatore M3
+                view.findViewById<CircularProgressIndicator>(R.id.passiProgress)
+                    .setProgressCompat(ut.getProgress(valoriPassi[0], valoriPassi[1]), true)
                 view.findViewById<TextView>(R.id.calorieTesto).text =
                     ut.getCalories(valoriPassi[0]) + " kcal"
                 view.findViewById<TextView>(R.id.kmTesto).text =
                     ut.getDistance(valoriPassi[0], valoriPassi[2]) + " km"
-                view.findViewById<ProgressBar>(R.id.OMSProgress)
-                    .setProgress(ut.getProgress(valoriPassi[0], 10000), true)
+                view.findViewById<LinearProgressIndicator>(R.id.OMSProgress)
+                    .setProgressCompat(ut.getProgress(valoriPassi[0], 10000), true)
 
                 if (ut.getProgress(valoriPassi[0], 10000) >= 100) {
                     view.findViewById<TextView>(R.id.OMS).text =
                         "Complimenti! Un altro passo verso una vita più sana :)"
                     view.findViewById<TextView>(R.id.OMS).textSize = 18F
-                    view.findViewById<TextView>(R.id.OMS).setTextColor(Color.parseColor("#E64E1B"))
+                    // colore preso dal tema, non cablato: con i colori dinamici
+                    // l'arancione fisso stonerebbe col resto della schermata
+                    view.findViewById<TextView>(R.id.OMS).setTextColor(
+                        MaterialColors.getColor(view, com.google.android.material.R.attr.colorPrimary)
+                    )
                 }
             }
         }

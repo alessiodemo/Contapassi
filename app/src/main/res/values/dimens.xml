@@ -7,4 +7,26 @@
     <dimen name="text_size_title">22sp</dimen>
     <dimen name="text_size_subtitle">20sp</dimen>
     <dimen name="text_size_body">18sp</dimen>
+    <dimen name="text_size_caption">15sp</dimen>
+
+    <!-- spaziature: in dp, NON scalano col font utente -->
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_s">8dp</dimen>
+    <dimen name="space_m">16dp</dimen>
+    <dimen name="space_l">24dp</dimen>
+
+    <!-- forma dei componenti -->
+    <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="card_elevation">3dp</dimen>
+    <dimen name="card_content_padding">16dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="progress_ring_size">260dp</dimen>
+    <dimen name="progress_ring_thickness">22dp</dimen>
+    <!-- il raggio non puo' superare meta' dello spessore: oltre, Material lo taglia -->
+    <dimen name="progress_ring_corner">11dp</dimen>
+
+    <!-- widget: su Android 12+ questo valore viene sostituito dal raggio di sistema
+         (values-v31), cosi' gli angoli combaciano con quelli degli altri widget -->
+    <dimen name="widget_corner_radius">16dp</dimen>
+    <dimen name="widget_padding">12dp</dimen>
 </resources>

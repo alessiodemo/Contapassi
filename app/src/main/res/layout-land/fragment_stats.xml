@@ -1,95 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".stats.StatsFragment"
-    android:id="@+id/frame">
+    tools:context=".stats.StatsFragment">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:id="@+id/linear">
-        <LinearLayout
+        android:orientation="horizontal">
+
+        <!-- in landscape le tre metriche si impilano in colonna a sinistra,
+             lasciando il resto della larghezza al grafico -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="20sp"
-            android:paddingHorizontal="30sp"
-            android:paddingVertical="10sp"
-            android:orientation="vertical"
-            android:background="@drawable/rounded_corners"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/space_m">
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
+                android:padding="@dimen/card_content_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/settimana"/>
-                <TextView
-                    android:id="@+id/mediaPassiSettimana"
-                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/space_s">
+
+                    <TextView
+                        style="@style/PassiText.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.06"
+                        android:text="@string/settimana"
+                        android:textAllCaps="true" />
+
+                    <TextView
+                        android:id="@+id/mediaPassiSettimana"
+                        style="@style/PassiText.Metric"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passiOggi" />
+
+                    <TextView
+                        android:id="@+id/mediaKmSettimana"
+                        style="@style/PassiText.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/km" />
+                </LinearLayout>
+
+                <View style="@style/PassiDivider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/passiOggi"
-                    android:textSize="20sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/mediaKmSettimana"
-                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/space_s">
+
+                    <TextView
+                        style="@style/PassiText.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.06"
+                        android:text="@string/mese"
+                        android:textAllCaps="true" />
+
+                    <TextView
+                        android:id="@+id/mediaPassiMese"
+                        style="@style/PassiText.Metric"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passiOggi" />
+
+                    <TextView
+                        android:id="@+id/mediaKmMese"
+                        style="@style/PassiText.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/km" />
+                </LinearLayout>
+
+                <View style="@style/PassiDivider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/km"/>
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/space_s">
+
+                    <TextView
+                        style="@style/PassiText.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.06"
+                        android:text="@string/obiettivi"
+                        android:textAllCaps="true" />
+
+                    <TextView
+                        android:id="@+id/obiettiviRaggiunti"
+                        style="@style/PassiText.Metric"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passiOggi" />
+
+                    <TextView
+                        android:id="@+id/obiettiviTotali"
+                        style="@style/PassiText.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/obiettiviTot" />
+                </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mese"/>
-                <TextView
-                    android:id="@+id/mediaPassiMese"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/passiOggi"
-                    android:textSize="20sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/mediaKmMese"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/km" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/obiettivi"/>
-                <TextView
-                    android:id="@+id/obiettiviRaggiunti"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/passiOggi"
-                    android:textSize="20sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/obiettiviTotali"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/obiettiviTot"/>
-            </LinearLayout>
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
 </FrameLayout>

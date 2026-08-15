@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Da Android 12 il sistema espone il raggio con cui il launcher ritaglia i widget.
+      Usandolo, lo sfondo del nostro widget combacia esattamente con la sagoma che il
+      launcher gli ritaglia intorno, invece di indovinare un valore fisso.
+    -->
+    <dimen name="widget_corner_radius">@android:dimen/system_app_widget_background_radius</dimen>
+</resources>

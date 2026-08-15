@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,161 +12,173 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="30dp">
+        android:paddingTop="@dimen/space_l"
+        android:paddingBottom="@dimen/space_m">
 
         <TextView
             android:id="@+id/giorno"
+            style="@style/PassiText.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:letterSpacing="0.08"
             android:text="@string/data"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_subtitle"/>
+            android:textAllCaps="true" />
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m">
 
-            <ProgressBar
+            <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/passiProgress"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                style="@style/PassiProgressRing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:indeterminateOnly="false"
-                android:progress="0"
-                android:progressDrawable="@drawable/circular_progress" />
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="0" />
 
             <LinearLayout
                 android:id="@+id/passiOggiGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
                 <TextView
+                    style="@style/PassiText.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/passi"/>
+                    android:letterSpacing="0.08"
+                    android:text="@string/passi"
+                    android:textAllCaps="true" />
+
                 <TextView
                     android:id="@+id/passiOggi"
+                    style="@style/PassiText.Display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/passiOggi"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="@dimen/text_size_display"
-                    android:textColor="@color/black" />
+                    android:text="@string/passiOggi" />
+
                 <TextView
                     android:id="@+id/passiObiettivo"
+                    style="@style/PassiText.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="@dimen/text_size_subtitle"
-                    android:text="@string/passiObiettivo"/>
+                    android:text="@string/passiObiettivo" />
 
             </LinearLayout>
         </RelativeLayout>
 
-        <LinearLayout
+        <!-- riquadro meteo / calorie / chilometri -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="20dp"
-            android:background="@drawable/rounded_corners"
-            android:padding="10dp">
+            android:layout_marginHorizontal="@dimen/space_m"
+            android:layout_marginTop="@dimen/space_l">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="10dp">
-                <ImageView
-                    android:id="@+id/meteoIcona"
-                    android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/card_content_padding">
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/no_meteo"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:padding="10dp"/>
-                <TextView
-                    android:id="@+id/meteoTesto"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/meteoIcona"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/no_meteo" />
+
+                    <TextView
+                        android:id="@+id/meteoTesto"
+                        style="@style/PassiText.Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_s"
+                        android:text="@string/temperatura" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/temperatura"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_body"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/fire" />
+
+                    <TextView
+                        android:id="@+id/calorieTesto"
+                        style="@style/PassiText.Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_s"
+                        android:text="@string/calorie" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/kmIcona"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/route" />
+
+                    <TextView
+                        android:id="@+id/kmTesto"
+                        style="@style/PassiText.Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_s"
+                        android:text="@string/km" />
+                </LinearLayout>
+
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="10dp">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/fire"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:padding="10dp"/>
-                <TextView
-                    android:id="@+id/calorieTesto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/calorie"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_body"
-                    android:layout_marginTop="5dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="10dp">
-                <ImageView
-                    android:id="@+id/kmIcona"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/route"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:padding="10dp"/>
-                <TextView
-                    android:id="@+id/kmTesto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/km"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_body"
-                    android:layout_marginTop="5dp"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <ProgressBar
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/OMSProgress"
+            style="@style/PassiProgressBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_l"
+            android:layout_marginTop="@dimen/space_l"
+            android:indeterminate="false"
             android:max="100"
-            android:progress="0"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/linear_progress"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="30dp"/>
+            android:progress="0" />
 
         <TextView
             android:id="@+id/OMS"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:textAlignment="center"
+            style="@style/PassiText.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/passiStandard"/>
+            android:layout_marginHorizontal="@dimen/space_l"
+            android:layout_marginVertical="@dimen/space_s"
+            android:text="@string/passiStandard"
+            android:textAlignment="center" />
     </LinearLayout>
 
 </FrameLayout>

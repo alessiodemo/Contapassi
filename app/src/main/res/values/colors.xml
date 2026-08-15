@@ -1,15 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="orange_300">#FFFF8D67</color>
-    <color name="orange_500">#FFFF7724</color>
-    <color name="orange_700">#FFE64E1B</color>
-    <color name="grey_300">#FFE5E5E5</color>
-    <color name="grey_100">#FFF6F6F6</color>
+
+    <!--
+      PALETTE MATERIAL 3 - tema chiaro.
+      L'override per il tema scuro sta in values-night/colors.xml con gli STESSI NOMI.
+
+      Material 3 non ragiona per "colore primario + accento" ma per COPPIE di ruoli:
+      ogni colore di sfondo ha il suo colore di contenuto (primary/onPrimary,
+      surface/onSurface...). Usando sempre la coppia giusta il contrasto e' garantito
+      in entrambi i temi, e i colori dinamici possono sostituirli in blocco.
+
+      Questi valori sono il FALLBACK: su Android 12+ DynamicColors li rimpiazza con
+      la palette estratta dallo sfondo del telefono (vedi PassiApplication.kt).
+    -->
+
+    <!-- sorgente del brand: non usarli nei layout, servono solo da riferimento -->
+    <color name="brand_orange">#FFFF7724</color>
+    <color name="brand_orange_light">#FFFF8D67</color>
+    <color name="brand_orange_dark">#FFE64E1B</color>
+
+    <!-- primary: azioni principali, indicatori di progresso -->
+    <color name="md_primary">#FFB3400A</color>
+    <color name="md_on_primary">#FFFFFFFF</color>
+    <color name="md_primary_container">#FFFFDBCC</color>
+    <color name="md_on_primary_container">#FF3B0A00</color>
+
+    <!-- secondary: elementi di supporto -->
+    <color name="md_secondary">#FF77574A</color>
+    <color name="md_on_secondary">#FFFFFFFF</color>
+    <color name="md_secondary_container">#FFFFDBCC</color>
+    <color name="md_on_secondary_container">#FF2C160D</color>
+
+    <!-- tertiary: accento di contrasto, usato per differenziare (es. obiettivi) -->
+    <color name="md_tertiary">#FF6C5D2F</color>
+    <color name="md_on_tertiary">#FFFFFFFF</color>
+    <color name="md_tertiary_container">#FFF5E1A7</color>
+    <color name="md_on_tertiary_container">#FF241A00</color>
+
+    <color name="md_error">#FFBA1A1A</color>
+    <color name="md_on_error">#FFFFFFFF</color>
+    <color name="md_error_container">#FFFFDAD6</color>
+    <color name="md_on_error_container">#FF410002</color>
+
+    <!-- superfici: in M3 le card non usano piu' l'ombra per staccarsi dallo sfondo,
+         ma un livello di superficie diverso (surface_container) -->
+    <color name="md_background">#FFFFF8F6</color>
+    <color name="md_on_background">#FF221A16</color>
+    <color name="md_surface">#FFFFF8F6</color>
+    <color name="md_on_surface">#FF221A16</color>
+    <color name="md_surface_variant">#FFF5DED5</color>
+    <color name="md_on_surface_variant">#FF53433D</color>
+    <color name="md_surface_container_lowest">#FFFFFFFF</color>
+    <color name="md_surface_container_low">#FFFFF1EB</color>
+    <color name="md_surface_container">#FFFCEAE3</color>
+    <color name="md_surface_container_high">#FFF7E4DD</color>
+    <color name="md_surface_container_highest">#FFF1DED7</color>
+
+    <color name="md_outline">#FF85736C</color>
+    <color name="md_outline_variant">#FFD8C2BA</color>
+    <color name="md_inverse_surface">#FF382E2A</color>
+    <color name="md_inverse_on_surface">#FFFFEDE7</color>
+
+    <!-- obiettivo raggiunto: non e' un ruolo Material, e' semantica dell'app -->
+    <color name="app_success">#FF2E9E5B</color>
+
+    <!--
+      WIDGET: il widget viene inflazionato dal LAUNCHER, quindi ?attr/... verrebbe
+      risolto contro il tema del launcher. Qui servono @color/ espliciti. Seguono
+      comunque chiaro/scuro (values-night) e su Android 12+ i colori di sistema
+      (values-v31), cosi' anche il widget si adatta allo sfondo del telefono.
+    -->
+    <color name="widget_background">#FFFCEAE3</color>
+    <color name="widget_on_background">#FF221A16</color>
+    <color name="widget_on_background_variant">#FF53433D</color>
+    <color name="widget_accent">#FFB3400A</color>
+
+    <!-- colori assoluti: solo dove serve davvero un valore fisso
+         (es. tinta della notifica in ForegroundService) -->
     <color name="black">#FF111111</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_black">#d27979</color>
-    <color name="light_blue_50">#FFE1F5FE</color>
-    <color name="light_blue_200">#FF81D4FA</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="light_blue_900">#FF01579B</color>
+
 </resources>

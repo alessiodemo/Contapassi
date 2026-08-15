@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Switch
 import android.widget.Toast
+import com.google.android.material.materialswitch.MaterialSwitch
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -82,7 +82,9 @@ class SettingsFragment : Fragment() {
             }
 
             //imposta le azioni alla modifica dello switch
-            view.findViewById<Switch>(R.id.raccolta_dati_switch)
+            // MaterialSwitch NON estende android.widget.Switch ma SwitchCompat:
+            // il tipo va aggiornato qui, altrimenti findViewById esplode in ClassCastException
+            view.findViewById<MaterialSwitch>(R.id.raccolta_dati_switch)
                 .setOnCheckedChangeListener { buttonView, isChecked ->
                     if (isChecked) {
                         val intent = Intent(requireContext(), ForegroundService::class.java)
@@ -96,7 +98,7 @@ class SettingsFragment : Fragment() {
 
             //imposta lo stato iniziale dello switch
             val status = isForegroundServiceRunning(ForegroundService::class.java)
-            view.findViewById<Switch>(R.id.raccolta_dati_switch).isChecked = status
+            view.findViewById<MaterialSwitch>(R.id.raccolta_dati_switch).isChecked = status
     }
 
     //controlla se il foreground service è attivo

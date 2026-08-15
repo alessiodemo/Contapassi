@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
     android:orientation="vertical"
-    android:background="@color/light_black">
+    android:padding="@dimen/widget_padding">
 
     <TextView
         android:id="@+id/textView8"
@@ -11,13 +12,15 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="2dp"
+        android:drawablePadding="6dp"
+        android:drawableTint="@color/widget_accent"
         android:gravity="center"
         android:text="@string/passi"
+        android:textColor="@color/widget_on_background"
         android:textSize="@dimen/text_size_headline"
-        android:textStyle="bold|italic"
-        android:typeface="normal" />
+        android:textStyle="bold" />
 
+    <!-- due colonne di uguale peso: al posto dei margini -110dp/+110dp -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -30,101 +33,137 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableLeft="@drawable/fire"
-            android:text="@string/calorie"
-            android:textSize="@dimen/text_size_subtitle"
+            android:drawablePadding="4dp"
             android:gravity="center"
-            android:layout_marginRight="-110dp" />
+            android:text="@string/calorie"
+            android:textColor="@color/widget_on_background_variant"
+            android:textSize="@dimen/text_size_subtitle" />
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginStart="110dp"
             android:drawableLeft="@drawable/sunny"
-            android:text="@string/meteoSole"
+            android:drawablePadding="4dp"
             android:gravity="center"
+            android:text="@string/meteoSole"
+            android:textColor="@color/widget_on_background_variant"
             android:textSize="@dimen/text_size_subtitle" />
 
-
     </LinearLayout>
+
+    <!-- separatore come LinearLayout e non come View: RemoteViews accetta solo una
+         lista chiusa di widget (FrameLayout, LinearLayout, TextView, ImageView...)
+         e la View "nuda" non ne fa parte, verrebbe rifiutata all'inflate -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@color/widget_on_background_variant" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textSize="@dimen/text_size_subtitle">
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/settimana"/>
+                android:text="@string/settimana"
+                android:textColor="@color/widget_on_background_variant"
+                android:textSize="@dimen/text_size_caption" />
+
             <TextView
                 android:id="@+id/mediaPassiSettimana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/passiOggi"
+                android:textColor="@color/widget_on_background"
                 android:textSize="@dimen/text_size_subtitle"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/mediaKmSettimana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/km"/>
+                android:text="@string/kmEtichetta"
+                android:textColor="@color/widget_on_background_variant"
+                android:textSize="@dimen/text_size_caption" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mese"/>
+                android:text="@string/mese"
+                android:textColor="@color/widget_on_background_variant"
+                android:textSize="@dimen/text_size_caption" />
+
             <TextView
                 android:id="@+id/mediaPassiMese"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/passiOggi"
+                android:textColor="@color/widget_on_background"
                 android:textSize="@dimen/text_size_subtitle"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/mediaKmMese"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/km"/>
+                android:text="@string/kmEtichetta"
+                android:textColor="@color/widget_on_background_variant"
+                android:textSize="@dimen/text_size_caption" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/obiettivi"/>
+                android:text="@string/obiettivi"
+                android:textColor="@color/widget_on_background_variant"
+                android:textSize="@dimen/text_size_caption" />
+
             <TextView
                 android:id="@+id/obiettiviRaggiunti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/passiOggi"
+                android:textColor="@color/widget_accent"
                 android:textSize="@dimen/text_size_subtitle"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/obiettiviTotali"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/obiettiviTot"/>
+                android:text="@string/obiettiviTot"
+                android:textColor="@color/widget_on_background_variant"
+                android:textSize="@dimen/text_size_caption" />
         </LinearLayout>
     </LinearLayout>
-
 
 </LinearLayout>

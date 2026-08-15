@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Android 12+, tema chiaro: il widget usa i colori di sistema estratti dallo
+      sfondo del telefono. E' l'equivalente per i widget di quello che DynamicColors
+      fa dentro l'app: il widget non puo' leggere il tema dell'app (lo inflaziona il
+      launcher), ma questi @android:color/system_* sono globali e disponibili a tutti.
+    -->
+    <color name="widget_background">@android:color/system_accent2_50</color>
+    <color name="widget_on_background">@android:color/system_neutral1_900</color>
+    <color name="widget_on_background_variant">@android:color/system_neutral2_700</color>
+    <color name="widget_accent">@android:color/system_accent1_600</color>
+</resources>

@@ -1,143 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".settings.SettingsFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="@dimen/space_s"
+        android:paddingBottom="@dimen/space_l">
+
+        <!-- raccolta dati -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_m"
+            android:layout_marginVertical="@dimen/space_s">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="20dp">
+                android:padding="@dimen/card_content_padding">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:layout_weight="1"
                     android:orientation="vertical"
-                    android:paddingRight="5dp">
+                    android:paddingEnd="@dimen/space_m">
+
                     <TextView
+                        style="@style/PassiText.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/titolo_raccolta_dati"
-                        android:textSize="@dimen/text_size_subtitle"
-                        android:textColor="@color/black"/>
+                        android:text="@string/titolo_raccolta_dati" />
+
                     <TextView
+                        style="@style/PassiText.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xs"
                         android:text="@string/testo_raccolta_dati" />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
 
-                    <Switch
-                        android:id="@+id/raccolta_dati_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="48dp"
-                        android:minHeight="48dp"
-                        android:thumbTint="@color/switch_colors"
-                        android:trackTint="@color/switch_track_colors" />
-                </LinearLayout>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="?attr/colorSecondary"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-                <TextView
+                <!-- MaterialSwitch: la variante M3, con l'icona di spunta nel pallino.
+                     I colori arrivano dal tema, niente piu' thumbTint/trackTint a mano. -->
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/raccolta_dati_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/titolo_obiettivo"
-                    android:textSize="@dimen/text_size_subtitle"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/testo_obiettivo" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <EditText
-                        android:id="@+id/inputObiettivo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="number"
-                        android:gravity="right"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="@string/passiEtichetta"
-                        android:paddingLeft="10dp"/>
-                </LinearLayout>
+                    android:minWidth="48dp"
+                    android:minHeight="48dp" />
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="?attr/colorSecondary"/>
-
-        <LinearLayout
+        <!-- obiettivo giornaliero -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/titolo_altezza"
-                android:textSize="@dimen/text_size_subtitle"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/testo_altezza" />
+            android:layout_marginHorizontal="@dimen/space_m"
+            android:layout_marginVertical="@dimen/space_s">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <EditText
-                    android:id="@+id/inputAltezza"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:gravity="right"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:text="@string/altezzaEtichetta"
-                    android:paddingLeft="10dp"/>
-            </LinearLayout>
-        </LinearLayout>
+                android:orientation="vertical"
+                android:padding="@dimen/card_content_padding">
 
-        <View
+                <TextView
+                    style="@style/PassiText.Subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titolo_obiettivo" />
+
+                <TextView
+                    style="@style/PassiText.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/testo_obiettivo" />
+
+                <!-- suffixText sostituisce la TextView "passi" che stava a fianco:
+                     l'unita' di misura fa parte del campo, non e' un elemento separato -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/PassiTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    app:suffixText="@string/passiEtichetta">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputObiettivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textSize="@dimen/text_size_body" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- altezza -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="?attr/colorSecondary"/>
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_m"
+            android:layout_marginVertical="@dimen/space_s">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/card_content_padding">
+
+                <TextView
+                    style="@style/PassiText.Subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titolo_altezza" />
+
+                <TextView
+                    style="@style/PassiText.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/testo_altezza" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/PassiTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    app:suffixText="@string/altezzaEtichetta">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputAltezza"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textSize="@dimen/text_size_body" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <Button
             android:id="@+id/aggiornaValori"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/space_m"
             android:text="@string/aggiorna_valori"
-            android:drawableEnd="@drawable/update"/>
+            app:icon="@drawable/update" />
 
     </LinearLayout>
 </FrameLayout>

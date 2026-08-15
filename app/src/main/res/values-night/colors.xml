@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+      PALETTE MATERIAL 3 - tema scuro. Stessi NOMI di values/colors.xml.
+      Regola M3: in tema scuro i colori "primary/secondary/tertiary" diventano
+      CHIARI e i loro "container" diventano SCURI. E' l'inverso esatto del tema
+      chiaro, per questo le coppie on* si scambiano di conseguenza.
+
+      Qui non ridefiniamo brand_*, black e white: non cambiano.
+    -->
+
+    <color name="md_primary">#FFFFB59B</color>
+    <color name="md_on_primary">#FF5F1600</color>
+    <color name="md_primary_container">#FF8A2E00</color>
+    <color name="md_on_primary_container">#FFFFDBCC</color>
+
+    <color name="md_secondary">#FFE7BEAC</color>
+    <color name="md_on_secondary">#FF442A1F</color>
+    <color name="md_secondary_container">#FF5D4034</color>
+    <color name="md_on_secondary_container">#FFFFDBCC</color>
+
+    <color name="md_tertiary">#FFD8C58D</color>
+    <color name="md_on_tertiary">#FF3A2F05</color>
+    <color name="md_tertiary_container">#FF52461A</color>
+    <color name="md_on_tertiary_container">#FFF5E1A7</color>
+
+    <color name="md_error">#FFFFB4AB</color>
+    <color name="md_on_error">#FF690005</color>
+    <color name="md_error_container">#FF93000A</color>
+    <color name="md_on_error_container">#FFFFDAD6</color>
+
+    <color name="md_background">#FF1A120E</color>
+    <color name="md_on_background">#FFF1DFD8</color>
+    <color name="md_surface">#FF1A120E</color>
+    <color name="md_on_surface">#FFF1DFD8</color>
+    <color name="md_surface_variant">#FF53433D</color>
+    <color name="md_on_surface_variant">#FFD8C2BA</color>
+    <color name="md_surface_container_lowest">#FF140D0A</color>
+    <color name="md_surface_container_low">#FF221A16</color>
+    <color name="md_surface_container">#FF271E1A</color>
+    <color name="md_surface_container_high">#FF322824</color>
+    <color name="md_surface_container_highest">#FF3D332E</color>
+
+    <color name="md_outline">#FFA08D85</color>
+    <color name="md_outline_variant">#FF53433D</color>
+    <color name="md_inverse_surface">#FFF1DFD8</color>
+    <color name="md_inverse_on_surface">#FF382E2A</color>
+
+    <color name="app_success">#FF5FD68C</color>
+
+    <color name="widget_background">#FF271E1A</color>
+    <color name="widget_on_background">#FFF1DFD8</color>
+    <color name="widget_on_background_variant">#FFD8C2BA</color>
+    <color name="widget_accent">#FFFFB59B</color>
+
+</resources>

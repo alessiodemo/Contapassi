@@ -35,7 +35,7 @@
     <string name="obiettiviTot">completati</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+    <string name="app_widget_description">Passi, calorie e chilometri di oggi direttamente sulla schermata home</string>
     <string name="widget_button_action">widgetButtonPassi</string>
     <string name="widget_button_action2">widgetButtonKm</string>
 </resources>

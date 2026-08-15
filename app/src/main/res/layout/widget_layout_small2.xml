@@ -2,27 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_black">
+    android:background="@drawable/widget_background"
+    android:gravity="center_vertical"
+    android:padding="@dimen/widget_padding">
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="0dp"
-        android:layout_height="89dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:contentDescription="@string/appwidget_text"
         android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="2dp"
+        android:drawablePadding="6dp"
+        android:drawableTint="@color/widget_accent"
         android:gravity="center"
         android:text="@string/passi"
         android:textAlignment="center"
-        android:textSize="@dimen/text_size_widget_headline" />
+        android:textColor="@color/widget_on_background"
+        android:textSize="@dimen/text_size_widget_headline"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
-        android:layout_height="89dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:drawableLeft="@drawable/route_outline"
+        android:drawablePadding="6dp"
         android:gravity="center"
-        android:text="Chilometri"
+        android:text="@string/kmEtichetta"
+        android:textColor="@color/widget_on_background_variant"
         android:textSize="@dimen/text_size_subtitle" />
 </LinearLayout>

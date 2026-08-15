@@ -2,15 +2,28 @@ package com.example.passi.stats
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
+import android.util.TypedValue
 import android.view.View
+import androidx.core.content.ContextCompat
+import com.example.passi.R
 import com.example.passi.core.data.StepRepository
 import java.time.LocalDate
 
 class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
 
     private var data: MutableList<Int> = mutableListOf()
+
+    /**
+     * Legge un colore dal TEMA corrente (es. ?attr/colorOnSurface) invece di usare
+     * una costante come Color.BLACK: cosi' il grafico resta leggibile anche in tema
+     * scuro, dove il nero su fondo scuro sparirebbe.
+     */
+    private fun themeColor(attr: Int): Int {
+        val value = TypedValue()
+        context.theme.resolveAttribute(attr, value, true)
+        return value.data
+    }
 
     init {
         setValue(passi)
@@ -62,9 +75,12 @@ class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
         val barSpacing = viewWidth / (numBars + 1)
         val barWidth = barSpacing / 2
 
+        val onSurface = themeColor(com.google.android.material.R.attr.colorOnSurface)
+        val onSurfaceVariant = themeColor(com.google.android.material.R.attr.colorOnSurfaceVariant)
+
         val paint = Paint()
         paint.style = Paint.Style.FILL
-        paint.color = Color.parseColor("#01796f")
+        paint.color = themeColor(com.google.android.material.R.attr.colorPrimary)
 
         val barMaxHeight = viewHeight * 0.9f
 
@@ -75,23 +91,23 @@ class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
         val borderPaint = Paint()
         borderPaint.style = Paint.Style.STROKE
         borderPaint.strokeWidth = 3f
-        borderPaint.color = Color.BLACK
+        borderPaint.color = themeColor(com.google.android.material.R.attr.colorOutline)
 
         val axisHeight = viewHeight - barMaxHeight
 
         val textPaint = Paint()
-        textPaint.color = Color.BLACK
+        textPaint.color = onSurface
         textPaint.textSize = 50f
         textPaint.textAlign = Paint.Align.CENTER
 
         val valuePaint = Paint()
-        valuePaint.color = Color.DKGRAY
+        valuePaint.color = onSurfaceVariant
         valuePaint.textSize = 50f
         valuePaint.textAlign = Paint.Align.CENTER
 
         val backgroundPaint = Paint()
         backgroundPaint.style = Paint.Style.FILL
-        val backgroundColor = Color.WHITE
+        val backgroundColor = themeColor(com.google.android.material.R.attr.colorSurface)
         backgroundPaint.color = backgroundColor
         canvas.drawRect(0f, 0f, viewWidth.toFloat(), viewHeight.toFloat(), backgroundPaint)
 
@@ -100,13 +116,13 @@ class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
 
         val lineY = viewHeight - (StepRepository.default_goal / maxHeight * barMaxHeight) - axisHeight
         val linePaint = Paint()
-        linePaint.color = Color.parseColor("#00bb2d")
+        linePaint.color = ContextCompat.getColor(context, R.color.app_success)
         linePaint.strokeWidth = 5f
         canvas.drawLine(0f, lineY, viewWidth.toFloat(), lineY, linePaint)
 
         val label = "Goal"
         val labelPaint = Paint()
-        labelPaint.color = Color.DKGRAY
+        labelPaint.color = onSurfaceVariant
         labelPaint.textSize = 40f
         labelPaint.textAlign = Paint.Align.CENTER
         val labelX = viewWidth / 2f

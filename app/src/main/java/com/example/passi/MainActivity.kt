@@ -40,6 +40,11 @@ class MainActivity : AppCompatActivity()  {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // il tema e' NoActionBar: la barra superiore ora e' la MaterialToolbar del
+        // layout, e va registrata qui perche' setupActionBarWithNavController()
+        // possa continuare a scriverci il titolo della destinazione corrente
+        setSupportActionBar(binding.toolbar)
+
         //richiesta dei permessi
         val permissions = arrayOf(
             Manifest.permission.INTERNET,

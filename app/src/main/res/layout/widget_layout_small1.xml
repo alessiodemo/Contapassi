@@ -1,50 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_black">
+    android:background="@drawable/widget_background"
+    android:gravity="center_vertical"
+    android:padding="@dimen/widget_padding">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
-        android:layout_height="89dp"
-        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
         android:contentDescription="@string/appwidget_text"
         android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="2dp"
+        android:drawablePadding="6dp"
+        android:drawableTint="@color/widget_accent"
         android:gravity="center"
         android:text="@string/passi"
         android:textAlignment="center"
+        android:textColor="@color/widget_on_background"
         android:textSize="@dimen/text_size_widget_headline"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/km"
         android:layout_width="0dp"
-        android:layout_height="89dp"
-        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
         android:contentDescription="@string/appwidget_text"
-        android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="2dp"
+        android:drawableLeft="@drawable/route"
+        android:drawablePadding="6dp"
         android:gravity="center"
-        android:text="@string/passi"
+        android:text="@string/kmEtichetta"
         android:textAlignment="center"
+        android:textColor="@color/widget_on_background"
         android:textSize="@dimen/text_size_widget_headline"
-        android:textStyle="bold|italic"
-        android:visibility="gone"/>
+        android:textStyle="bold"
+        android:visibility="gone" />
 
+    <!--
+      android:tint e non app:tint: lint suggerisce app:tint perche' presuppone che la
+      view venga inflazionata da AppCompat, ma qui inflaziona il LAUNCHER con un
+      LayoutInflater normale. app:tint sarebbe semplicemente ignorato e l'icona
+      resterebbe del suo colore originale.
+    -->
     <ImageButton
         android:id="@+id/widgetButtonPassi"
         android:layout_width="0dp"
-        android:layout_height="89dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/widget_button_action"
         android:src="@drawable/walk_black"
-        android:visibility="gone"/>
+        android:tint="@color/widget_on_background_variant"
+        android:visibility="gone"
+        tools:ignore="UseAppTint" />
 
     <ImageButton
         android:id="@+id/widgetButtonKm"
         android:layout_width="0dp"
-        android:layout_height="89dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
-        android:src="@drawable/walk_black" />
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/widget_button_action2"
+        android:src="@drawable/route_outline"
+        android:tint="@color/widget_on_background_variant"
+        tools:ignore="UseAppTint" />
 
 </LinearLayout>
