@@ -28,7 +28,7 @@
     <string name="altezzaEtichetta">centimetri</string>
     <string name="calorie">0 kcal</string>
     <string name="meseOb">---</string>
-    <string name="suPassiOb">/0</string>
+    <string name="suPassiOb">su 0</string>
     <string name="kmEtichetta">0 km</string>
     <string name="kcalEtichetta">0 kcal</string>
     <string name="aggiorna_valori">Aggiorna i valori</string>
@@ -38,4 +38,28 @@
     <string name="app_widget_description">Passi, calorie e chilometri di oggi direttamente sulla schermata home</string>
     <string name="widget_button_action">widgetButtonPassi</string>
     <string name="widget_button_action2">widgetButtonKm</string>
+
+    <!--
+      FORMATI CON UNITA' DI MISURA.
+      Sono l'unico punto dell'app in cui compaiono "km", "kcal" e "°C": prima le stesse
+      unita' erano concatenate a mano in quattro classi diverse, con cinque grafie
+      differenti ("km", "Km", " km", "kcal", "Kcal").
+
+      I simboli SI vogliono la k minuscola (la K maiuscola e' il Kelvin) e uno spazio
+      tra valore e unita'.
+
+      %1$s / %1$d sono segnaposto POSIZIONALI: il numero dice quale argomento inserire
+      e la lettera di che tipo e'. Il tipo sbagliato non e' un errore di compilazione ma
+      un crash a runtime, quindi s = stringa gia' formattata, d = intero.
+    -->
+    <string name="formato_km">%1$s km</string>
+    <string name="formato_kcal">%1$s kcal</string>
+    <string name="formato_gradi">%1$d °C</string>
+    <string name="formato_obiettivo">/%1$d</string>
+    <string name="formato_su_obiettivo">su %1$d</string>
+
+    <!-- testi che erano cablati nel codice Kotlin -->
+    <string name="complimenti_oms">Complimenti! Un altro passo verso una vita più sana :)</string>
+    <string name="modifiche_salvate">Modifiche salvate</string>
+    <string name="nessun_sensore">Nessun sensore di passi rilevato su questo dispositivo</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -19,7 +20,8 @@ import com.example.passi.SharedViewModel
 import com.example.passi.core.data.AppDatabase
 import com.example.passi.core.data.StepRepository
 import com.example.passi.core.utility.Utility
-import com.example.passi.core.weather.HttpWeatherRequest
+import com.example.passi.core.weather.WeatherRepository
+import com.example.passi.core.weather.weatherIcon
 import kotlinx.coroutines.launch
 
 
@@ -57,21 +59,21 @@ class HomeFragment : Fragment() {
                 val valoriPassi = repository.getValueFromKey(key)
                 view.findViewById<TextView>(R.id.passiOggi).text = valoriPassi[0].toString()
                 view.findViewById<TextView>(R.id.passiObiettivo).text =
-                    "/" + valoriPassi[1].toString()
+                    getString(R.string.formato_obiettivo, valoriPassi[1])
                 // setProgressCompat e' l'equivalente Material di setProgress(valore, true):
                 // anima la transizione usando le animazioni dell'indicatore M3
                 view.findViewById<CircularProgressIndicator>(R.id.passiProgress)
                     .setProgressCompat(ut.getProgress(valoriPassi[0], valoriPassi[1]), true)
                 view.findViewById<TextView>(R.id.calorieTesto).text =
-                    ut.getCalories(valoriPassi[0]) + " kcal"
+                    getString(R.string.formato_kcal, ut.getCalories(valoriPassi[0]))
                 view.findViewById<TextView>(R.id.kmTesto).text =
-                    ut.getDistance(valoriPassi[0], valoriPassi[2]) + " km"
+                    getString(R.string.formato_km, ut.getDistance(valoriPassi[0], valoriPassi[2]))
                 view.findViewById<LinearProgressIndicator>(R.id.OMSProgress)
                     .setProgressCompat(ut.getProgress(valoriPassi[0], 10000), true)
 
                 if (ut.getProgress(valoriPassi[0], 10000) >= 100) {
                     view.findViewById<TextView>(R.id.OMS).text =
-                        "Complimenti! Un altro passo verso una vita più sana :)"
+                        getString(R.string.complimenti_oms)
                     view.findViewById<TextView>(R.id.OMS).textSize = 18F
                     // colore preso dal tema, non cablato: con i colori dinamici
                     // l'arancione fisso stonerebbe col resto della schermata
@@ -93,14 +95,13 @@ class HomeFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 val pos = LocationProvider(requireContext()).getPosition()
                     ?: return@launch
-                val url = "https://api.open-meteo.com/v1/forecast" +
-                        "?latitude=${pos.latitude}&longitude=${pos.longitude}" +
-                        "&hourly=temperature_2m,weathercode&forecast_days=1&timezone=auto"
-                HttpWeatherRequest(
-                    requireContext(),
-                    view.findViewById(R.id.meteoTesto),
-                    view.findViewById(R.id.meteoIcona)
-                ).execute(url)
+                val meteo = WeatherRepository(requireContext())
+                    .fetch(pos.latitude, pos.longitude) ?: return@launch
+
+                view.findViewById<TextView>(R.id.meteoTesto).text =
+                    getString(R.string.formato_gradi, meteo.temperatureC)
+                view.findViewById<ImageView>(R.id.meteoIcona)
+                    .setImageResource(weatherIcon(meteo.weatherCode))
             }
         }
 

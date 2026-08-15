@@ -26,14 +26,17 @@ class GoalsAdapter(private val goalsList: MutableList<GoalRow>) :
             goalsGiorno.text = row.giorno.toString()
             goalsMese.text = row.mese
             goalsPassi.text = row.passi.toString()
-            goalsObiettivo.text = "su ${row.obiettivo}"
+            goalsObiettivo.text =
+                itemView.context.getString(R.string.formato_su_obiettivo, row.obiettivo)
             if(row.done){
                 goalsCheck.setImageResource(R.drawable.check_circle)
             } else {
                 goalsCheck.setImageResource(R.drawable.cancel_circle)
             }
-            goalsCalorie.text = row.kcal + " kcal"
-            goalsDistanza.text = row.distanza + "km"
+            goalsCalorie.text =
+                itemView.context.getString(R.string.formato_kcal, row.kcal)
+            goalsDistanza.text =
+                itemView.context.getString(R.string.formato_km, row.distanza)
         }
     }
 

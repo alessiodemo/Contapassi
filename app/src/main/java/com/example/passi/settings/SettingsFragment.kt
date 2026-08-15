@@ -77,7 +77,9 @@ class SettingsFragment : Fragment() {
                         view.findViewById<EditText>(R.id.inputObiettivo).text.toString().toInt()
                     )
                     model.setData(true)
-                    Toast.makeText(requireContext(), "Modifiche salvate", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(), R.string.modifiche_salvate, Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 

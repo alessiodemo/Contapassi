@@ -24,9 +24,9 @@ import com.example.passi.BuildConfig
 import com.example.passi.MainActivity
 import com.example.passi.R
 import com.example.passi.core.data.AppDatabase
-import com.example.passi.core.data.Database
 import com.example.passi.core.data.StepRepository
 import com.example.passi.core.utility.Utility
+import com.example.passi.core.weather.weatherIcon
 import com.example.passi.core.widget.StepsWidget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,7 +53,7 @@ class ForegroundService: Service(), SensorEventListener {
         context = this
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         if (stepSensor == null) {
-            Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.nessun_sensore, Toast.LENGTH_SHORT).show()
         } else {
             sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
         }
@@ -61,8 +61,8 @@ class ForegroundService: Service(), SensorEventListener {
 
     suspend fun updateWidget(){
         val ut = Utility()
-        val meteo = ut.loadData(context, "meteo").toInt().toString()
-        val temperatura = ut.loadData(context, "temperatura").toString()
+        val codiceMeteo = ut.loadData(context, "meteo").toInt()
+        val temperatura = ut.loadData(context, "temperatura").toInt()
         val key = repository.formatKey(ut.getDataOggi())
         val valori = repository.getValueFromKey(key)
         val passiSettimana = repository.totalWeeklySteps().toString()
@@ -83,64 +83,38 @@ class ForegroundService: Service(), SensorEventListener {
             //small1
             val remoteViewsSmall1 = RemoteViews(packageName, R.layout.widget_layout_small1)
             remoteViewsSmall1.setTextViewText(R.id.textView, valori[0].toString())
-            remoteViewsSmall1.setTextViewText(R.id.km, ut.getDistance(valori[0],valori[2]))
+            remoteViewsSmall1.setTextViewText(
+                R.id.km, getString(R.string.formato_km, ut.getDistance(valori[0], valori[2]))
+            )
             appWidgetManager.updateAppWidget(widgetId, remoteViewsSmall1)
             //small2
             val remoteViewsSmall2 = RemoteViews(packageName, R.layout.widget_layout_small2)
             remoteViewsSmall2.setTextViewText(R.id.textView3, valori[0].toString())
-            remoteViewsSmall2.setTextViewText(R.id.textView4, ut.getDistance(valori[0],valori[2]))
+            remoteViewsSmall2.setTextViewText(
+                R.id.textView4, getString(R.string.formato_km, ut.getDistance(valori[0], valori[2]))
+            )
             appWidgetManager.updateAppWidget(widgetId, remoteViewsSmall2)
             //normal
             val remoteViewsNormal = RemoteViews(packageName, R.layout.widget_layout_normal)
             remoteViewsNormal.setTextViewText(R.id.textView5, valori[0].toString())
-            remoteViewsNormal.setTextViewText(R.id.textView6, ut.getCalories(valori[0]))
-            remoteViewsNormal.setTextViewText(R.id.textView7, temperatura+" °C" )
-            when(meteo){
-                "0","1" -> remoteViewsNormal.setTextViewCompoundDrawables(
-                    R.id.textView7,
-                    R.drawable.sunny,0,0,0)
-                "2","3" -> remoteViewsNormal.setTextViewCompoundDrawables(
-                    R.id.textView7,
-                    R.drawable.cloudy,0,0,0)
-                "45", "48" -> remoteViewsNormal.setTextViewCompoundDrawables(
-                    R.id.textView7,
-                    R.drawable.foggy,0,0,0)
-                "51", "53", "55", "56", "57", "61", "63", "65", "66", "67", "80", "81", "82", "95", "96", "99" -> remoteViewsNormal.setTextViewCompoundDrawables(
-                    R.id.textView7,
-                    R.drawable.rain,0,0,0)
-                "71", "73", "75", "77", "85", "86" -> remoteViewsNormal.setTextViewCompoundDrawables(
-                    R.id.textView7,
-                    R.drawable.snow,0,0,0)
-                else -> remoteViewsNormal.setTextViewCompoundDrawables(
-                    R.id.textView7,
-                    R.drawable.no_meteo,0,0,0)
-            }
+            remoteViewsNormal.setTextViewText(
+                R.id.textView6, getString(R.string.formato_kcal, ut.getCalories(valori[0]))
+            )
+            remoteViewsNormal.setTextViewText(
+                R.id.textView7, getString(R.string.formato_gradi, temperatura)
+            )
+            remoteViewsNormal.setTextViewCompoundDrawables(R.id.textView7, weatherIcon(codiceMeteo), 0, 0, 0)
             appWidgetManager.updateAppWidget(widgetId, remoteViewsNormal)
             //large
             val remoteViewsLarge = RemoteViews(packageName, R.layout.widget_layout_large)
             remoteViewsLarge.setTextViewText(R.id.textView8, valori[0].toString())
-            remoteViewsLarge.setTextViewText(R.id.textView9, ut.getCalories(valori[0]))
-            remoteViewsLarge.setTextViewText(R.id.textView10, temperatura+" °C" )
-            when(meteo){
-                "0","1" -> remoteViewsLarge.setTextViewCompoundDrawables(
-                    R.id.textView10,
-                    R.drawable.sunny,0,0,0)
-                "2","3" -> remoteViewsLarge.setTextViewCompoundDrawables(
-                    R.id.textView10,
-                    R.drawable.cloudy,0,0,0)
-                "45", "48" -> remoteViewsLarge.setTextViewCompoundDrawables(
-                    R.id.textView10,
-                    R.drawable.foggy,0,0,0)
-                "51", "53", "55", "56", "57", "61", "63", "65", "66", "67", "80", "81", "82", "95", "96", "99" -> remoteViewsLarge.setTextViewCompoundDrawables(
-                    R.id.textView10,
-                    R.drawable.rain,0,0,0)
-                "71", "73", "75", "77", "85", "86" -> remoteViewsLarge.setTextViewCompoundDrawables(
-                    R.id.textView10,
-                    R.drawable.snow,0,0,0)
-                else -> remoteViewsLarge.setTextViewCompoundDrawables(
-                    R.id.textView10,
-                    R.drawable.no_meteo,0,0,0)
-            }
+            remoteViewsLarge.setTextViewText(
+                R.id.textView9, getString(R.string.formato_kcal, ut.getCalories(valori[0]))
+            )
+            remoteViewsLarge.setTextViewText(
+                R.id.textView10, getString(R.string.formato_gradi, temperatura)
+            )
+            remoteViewsLarge.setTextViewCompoundDrawables(R.id.textView10, weatherIcon(codiceMeteo), 0, 0, 0)
             remoteViewsLarge.setTextViewText(R.id.mediaPassiSettimana, passiSettimana)
             remoteViewsLarge.setTextViewText(R.id.mediaPassiMese, passiMese)
             remoteViewsLarge.setTextViewText(R.id.obiettiviRaggiunti, obiettivi)
