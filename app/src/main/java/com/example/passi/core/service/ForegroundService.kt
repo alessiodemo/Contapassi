@@ -6,8 +6,6 @@ import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -17,7 +15,6 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.IBinder
-import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.example.passi.BuildConfig
@@ -26,7 +23,6 @@ import com.example.passi.R
 import com.example.passi.core.data.AppDatabase
 import com.example.passi.core.data.StepRepository
 import com.example.passi.core.utility.Utility
-import com.example.passi.core.weather.weatherIcon
 import com.example.passi.core.widget.StepsWidget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +36,6 @@ class ForegroundService: Service(), SensorEventListener {
             Dispatchers.IO)
     private lateinit var repository: StepRepository
     private var sensorManager: SensorManager? = null
-    private lateinit var context: Context
 
     companion object {
         const val ACTION_STOP = "${BuildConfig.APPLICATION_ID}.stop"
@@ -50,7 +45,6 @@ class ForegroundService: Service(), SensorEventListener {
         super.onCreate()
         repository = StepRepository(AppDatabase.getInstance(this).stepDao())
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        context = this
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         if (stepSensor == null) {
             Toast.makeText(this, R.string.nessun_sensore, Toast.LENGTH_SHORT).show()
@@ -59,68 +53,13 @@ class ForegroundService: Service(), SensorEventListener {
         }
     }
 
-    suspend fun updateWidget(){
-        val ut = Utility()
-        val codiceMeteo = ut.loadData(context, "meteo").toInt()
-        val temperatura = ut.loadData(context, "temperatura").toInt()
-        val key = repository.formatKey(ut.getDataOggi())
-        val valori = repository.getValueFromKey(key)
-        val passiSettimana = repository.totalWeeklySteps().toString()
-        val passiMese = repository.totalMonthlySteps().toString()
-        val obiettivi = repository.goalsReached().toString()
-        val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
-        val stepsWidgetIds = appWidgetManager.getAppWidgetIds(
-            ComponentName(
-                applicationContext,
-                StepsWidget::class.java
-            )
-        )
-        for (widgetId in stepsWidgetIds) {
-            //small
-            val remoteViewsSmall = RemoteViews(packageName, R.layout.widget_layout_small)
-            remoteViewsSmall.setTextViewText(R.id.textView, valori[0].toString())
-            appWidgetManager.updateAppWidget(widgetId, remoteViewsSmall)
-            //small1
-            val remoteViewsSmall1 = RemoteViews(packageName, R.layout.widget_layout_small1)
-            remoteViewsSmall1.setTextViewText(R.id.textView, valori[0].toString())
-            remoteViewsSmall1.setTextViewText(
-                R.id.km, getString(R.string.formato_km, ut.getDistance(valori[0], valori[2]))
-            )
-            appWidgetManager.updateAppWidget(widgetId, remoteViewsSmall1)
-            //small2
-            val remoteViewsSmall2 = RemoteViews(packageName, R.layout.widget_layout_small2)
-            remoteViewsSmall2.setTextViewText(R.id.textView3, valori[0].toString())
-            remoteViewsSmall2.setTextViewText(
-                R.id.textView4, getString(R.string.formato_km, ut.getDistance(valori[0], valori[2]))
-            )
-            appWidgetManager.updateAppWidget(widgetId, remoteViewsSmall2)
-            //normal
-            val remoteViewsNormal = RemoteViews(packageName, R.layout.widget_layout_normal)
-            remoteViewsNormal.setTextViewText(R.id.textView5, valori[0].toString())
-            remoteViewsNormal.setTextViewText(
-                R.id.textView6, getString(R.string.formato_kcal, ut.getCalories(valori[0]))
-            )
-            remoteViewsNormal.setTextViewText(
-                R.id.textView7, getString(R.string.formato_gradi, temperatura)
-            )
-            remoteViewsNormal.setTextViewCompoundDrawables(R.id.textView7, weatherIcon(codiceMeteo), 0, 0, 0)
-            appWidgetManager.updateAppWidget(widgetId, remoteViewsNormal)
-            //large
-            val remoteViewsLarge = RemoteViews(packageName, R.layout.widget_layout_large)
-            remoteViewsLarge.setTextViewText(R.id.textView8, valori[0].toString())
-            remoteViewsLarge.setTextViewText(
-                R.id.textView9, getString(R.string.formato_kcal, ut.getCalories(valori[0]))
-            )
-            remoteViewsLarge.setTextViewText(
-                R.id.textView10, getString(R.string.formato_gradi, temperatura)
-            )
-            remoteViewsLarge.setTextViewCompoundDrawables(R.id.textView10, weatherIcon(codiceMeteo), 0, 0, 0)
-            remoteViewsLarge.setTextViewText(R.id.mediaPassiSettimana, passiSettimana)
-            remoteViewsLarge.setTextViewText(R.id.mediaPassiMese, passiMese)
-            remoteViewsLarge.setTextViewText(R.id.obiettiviRaggiunti, obiettivi)
-            appWidgetManager.updateAppWidget(widgetId, remoteViewsLarge)
-        }
-
+    /**
+     * Il disegno del widget vive tutto in StepsWidget: qui c'era una copia della stessa
+     * logica che pubblicava cinque RemoteViews di fila sullo stesso widget, e siccome
+     * updateAppWidget sostituisce invece di aggiornare, sopravviveva solo l'ultima.
+     */
+    suspend fun updateWidget() {
+        StepsWidget.aggiornaTuttiIWidget(this)
     }
 
     override fun onBind(intent: Intent?): IBinder? {

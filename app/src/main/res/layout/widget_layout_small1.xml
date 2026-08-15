@@ -5,61 +5,79 @@
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
     android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:padding="@dimen/widget_padding">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:autoSizeMaxTextSize="@dimen/text_size_widget_headline"
-        android:autoSizeMinTextSize="@dimen/text_size_body"
-        android:autoSizeStepGranularity="1sp"
-        android:autoSizeTextType="uniform"
-        android:contentDescription="@string/appwidget_text"
-        android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="6dp"
-        android:drawableTint="@color/widget_accent"
-        android:gravity="center"
-        android:maxLines="1"
-        android:text="@string/passi"
-        android:textAlignment="center"
-        android:textColor="@color/widget_on_background"
-        android:textStyle="bold" />
+    <ImageView
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@drawable/widget_icon_circle"
+        android:contentDescription="@string/passi"
+        android:padding="7dp"
+        android:src="@drawable/walk_black"
+        android:tint="@color/widget_on_accent_container"
+        tools:ignore="UseAppTint" />
 
-    <TextView
-        android:id="@+id/km"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:autoSizeMaxTextSize="@dimen/text_size_widget_headline"
-        android:autoSizeMinTextSize="@dimen/text_size_body"
-        android:autoSizeStepGranularity="1sp"
-        android:autoSizeTextType="uniform"
-        android:contentDescription="@string/appwidget_text"
-        android:drawableLeft="@drawable/route"
-        android:drawablePadding="6dp"
-        android:gravity="center"
-        android:maxLines="1"
-        android:text="@string/kmEtichetta"
-        android:textAlignment="center"
-        android:textColor="@color/widget_on_background"
-        android:textStyle="bold"
-        android:visibility="gone" />
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="@dimen/text_size_widget_headline"
+            android:autoSizeMinTextSize="@dimen/text_size_body"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:contentDescription="@string/appwidget_text"
+            android:maxLines="1"
+            android:text="@string/passiOggi"
+            android:textColor="@color/widget_accent"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/km"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="@dimen/text_size_widget_headline"
+            android:autoSizeMinTextSize="@dimen/text_size_body"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:contentDescription="@string/appwidget_text"
+            android:maxLines="1"
+            android:text="@string/kmEtichetta"
+            android:textColor="@color/widget_accent"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progressPassi"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_marginTop="4dp"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/widget_progress" />
+    </LinearLayout>
 
     <!--
       android:tint e non app:tint: lint suggerisce app:tint perche' presuppone che la
       view venga inflazionata da AppCompat, ma qui inflaziona il LAUNCHER con un
-      LayoutInflater normale. app:tint sarebbe semplicemente ignorato e l'icona
-      resterebbe del suo colore originale.
+      LayoutInflater normale. app:tint sarebbe semplicemente ignorato.
     -->
     <ImageButton
         android:id="@+id/widgetButtonPassi"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_weight="1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="6dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/widget_button_action"
+        android:padding="8dp"
         android:src="@drawable/walk_black"
         android:tint="@color/widget_on_background_variant"
         android:visibility="gone"
@@ -67,11 +85,12 @@
 
     <ImageButton
         android:id="@+id/widgetButtonKm"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_weight="1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="6dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/widget_button_action2"
+        android:padding="8dp"
         android:src="@drawable/route_outline"
         android:tint="@color/widget_on_background_variant"
         tools:ignore="UseAppTint" />

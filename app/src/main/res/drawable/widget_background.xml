@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Sfondo del widget. Il raggio arriva da @dimen/widget_corner_radius, che su
-  Android 12+ (values-v31) diventa il raggio di sistema: cosi' la nostra forma
-  combacia con la sagoma che il launcher ritaglia, invece di lasciare gli angoli
-  quadrati dentro un ritaglio tondo.
+  Android 12+ (values-v31) diventa il raggio di sistema.
+
+  Il gradiente e' molto tenue di proposito: due tinte vicine su un angolo di 270
+  gradi (dall'alto verso il basso). Serve a dare un accenno di volume, non a
+  farsi notare — un gradiente marcato su una superficie piccola come un widget
+  sembra sporco piu' che profondo.
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@color/widget_background" />
+    <gradient
+        android:angle="270"
+        android:endColor="@color/widget_background_end"
+        android:startColor="@color/widget_background"
+        android:type="linear" />
     <corners android:radius="@dimen/widget_corner_radius" />
 </shape>

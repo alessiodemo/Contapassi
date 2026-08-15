@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pastiglia tonda dietro l'icona. E' il trucco piu' economico per creare un punto
+  focale: l'icona smette di essere un segno appoggiato sul fondo e diventa un
+  elemento con un suo peso, che ancora l'occhio all'angolo in cui inizia a leggere.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/widget_accent_container" />
+</shape>

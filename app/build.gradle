@@ -32,12 +32,13 @@ android {
         jvmTarget = '1.8'
     }
 
-    dataBinding {
-        enabled = true
-    }
-
+    // solo viewBinding: nessun layout usa il tag <layout>, quindi il data binding
+    // era attivo a vuoto e faceva girare il suo annotation processor a ogni build.
+    // buildConfig serve per BuildConfig.APPLICATION_ID, usato dalle action del servizio;
+    // era attivato dalla proprieta' deprecata android.defaults.buildfeatures.buildconfig
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
@@ -52,7 +53,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.gms:play-services-location:21.4.0'
     implementation 'androidx.room:room-runtime:2.8.4'
     implementation 'androidx.room:room-ktx:2.8.4'

@@ -14,11 +14,6 @@
       la palette estratta dallo sfondo del telefono (vedi PassiApplication.kt).
     -->
 
-    <!-- sorgente del brand: non usarli nei layout, servono solo da riferimento -->
-    <color name="brand_orange">#FFFF7724</color>
-    <color name="brand_orange_light">#FFFF8D67</color>
-    <color name="brand_orange_dark">#FFE64E1B</color>
-
     <!-- primary: azioni principali, indicatori di progresso -->
     <color name="md_primary">#FFB3400A</color>
     <color name="md_on_primary">#FFFFFFFF</color>
@@ -70,14 +65,17 @@
       comunque chiaro/scuro (values-night) e su Android 12+ i colori di sistema
       (values-v31), cosi' anche il widget si adatta allo sfondo del telefono.
     -->
-    <color name="widget_background">#FFFCEAE3</color>
+    <color name="widget_background">#FFFFF3EC</color>
+    <color name="widget_background_end">#FFF7E0D6</color>
     <color name="widget_on_background">#FF221A16</color>
     <color name="widget_on_background_variant">#FF53433D</color>
     <color name="widget_accent">#FFB3400A</color>
+    <color name="widget_accent_container">#FFFFDBCC</color>
+    <color name="widget_on_accent_container">#FF3B0A00</color>
+    <color name="widget_track">#FFF0D8CD</color>
 
-    <!-- colori assoluti: solo dove serve davvero un valore fisso
-         (es. tinta della notifica in ForegroundService) -->
+    <!-- colore assoluto: solo dove serve davvero un valore fisso
+         (la tinta della notifica in ForegroundService) -->
     <color name="black">#FF111111</color>
-    <color name="white">#FFFFFFFF</color>
 
 </resources>

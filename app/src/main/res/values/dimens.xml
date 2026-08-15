@@ -20,7 +20,6 @@
 
     <!-- forma dei componenti -->
     <dimen name="card_corner_radius">20dp</dimen>
-    <dimen name="card_elevation">3dp</dimen>
     <dimen name="card_content_padding">16dp</dimen>
     <dimen name="divider_height">1dp</dimen>
     <dimen name="progress_ring_size">260dp</dimen>

@@ -6,29 +6,53 @@
   colori di sistema su Android 12+ (values-v31).
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:padding="@dimen/widget_padding">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@drawable/widget_icon_circle"
+        android:contentDescription="@string/passi"
+        android:padding="7dp"
+        android:src="@drawable/walk_black"
+        android:tint="@color/widget_on_accent_container"
+        tools:ignore="UseAppTint" />
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:autoSizeMaxTextSize="@dimen/text_size_widget_headline"
-        android:autoSizeMinTextSize="@dimen/text_size_body"
-        android:autoSizeStepGranularity="1sp"
-        android:autoSizeTextType="uniform"
-        android:contentDescription="@string/appwidget_text"
-        android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="6dp"
-        android:drawableTint="@color/widget_accent"
-        android:gravity="center"
-        android:maxLines="1"
-        android:text="@string/passi"
-        android:textAlignment="center"
-        android:textColor="@color/widget_on_background"
-        android:textStyle="bold" />
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="@dimen/text_size_widget_headline"
+            android:autoSizeMinTextSize="@dimen/text_size_body"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:contentDescription="@string/appwidget_text"
+            android:maxLines="1"
+            android:text="@string/passiOggi"
+            android:textColor="@color/widget_accent"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressPassi"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_marginTop="4dp"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/widget_progress" />
+    </LinearLayout>
 </LinearLayout>

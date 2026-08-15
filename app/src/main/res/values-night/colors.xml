@@ -49,9 +49,13 @@
 
     <color name="app_success">#FF5FD68C</color>
 
-    <color name="widget_background">#FF271E1A</color>
+    <color name="widget_background">#FF2C221D</color>
+    <color name="widget_background_end">#FF1F1815</color>
     <color name="widget_on_background">#FFF1DFD8</color>
     <color name="widget_on_background_variant">#FFD8C2BA</color>
     <color name="widget_accent">#FFFFB59B</color>
+    <color name="widget_accent_container">#FF8A2E00</color>
+    <color name="widget_on_accent_container">#FFFFDBCC</color>
+    <color name="widget_track">#FF46372F</color>
 
 </resources>

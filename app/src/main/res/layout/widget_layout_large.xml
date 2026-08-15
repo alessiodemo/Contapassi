@@ -6,68 +6,110 @@
   che e' la versione di piattaforma, disponibile da API 26 (il nostro minSdk).
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
     android:orientation="vertical"
     android:padding="@dimen/widget_padding">
 
-    <TextView
-        android:id="@+id/textView8"
+    <!-- intestazione -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:autoSizeMaxTextSize="@dimen/text_size_headline"
-        android:autoSizeMinTextSize="@dimen/text_size_body"
-        android:autoSizeStepGranularity="1sp"
-        android:autoSizeTextType="uniform"
-        android:drawableLeft="@drawable/walk_black"
-        android:drawablePadding="6dp"
-        android:drawableTint="@color/widget_accent"
-        android:gravity="center"
-        android:maxLines="1"
-        android:text="@string/passi"
-        android:textColor="@color/widget_on_background"
-        android:textStyle="bold" />
+        android:layout_weight="1.2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <!-- due colonne di uguale peso: al posto dei margini -110dp/+110dp -->
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/widget_icon_circle"
+            android:contentDescription="@string/passi"
+            android:padding="9dp"
+            android:src="@drawable/walk_black"
+            android:tint="@color/widget_on_accent_container"
+            tools:ignore="UseAppTint" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="@dimen/text_size_display"
+                android:autoSizeMinTextSize="@dimen/text_size_subtitle"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                android:text="@string/passiOggi"
+                android:textColor="@color/widget_accent"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/passi"
+                android:textColor="@color/widget_on_background_variant"
+                android:textSize="@dimen/text_size_caption" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressPassi"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:layout_marginVertical="8dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/widget_progress" />
+
+    <!-- calorie e meteo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="@dimen/text_size_subtitle"
             android:autoSizeMinTextSize="@dimen/text_size_autosize_min"
             android:autoSizeStepGranularity="1sp"
             android:autoSizeTextType="uniform"
             android:drawableLeft="@drawable/fire"
-            android:drawablePadding="4dp"
-            android:gravity="center"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
             android:maxLines="1"
             android:text="@string/calorie"
-            android:textColor="@color/widget_on_background_variant" />
+            android:textColor="@color/widget_on_background" />
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autoSizeMaxTextSize="@dimen/text_size_subtitle"
             android:autoSizeMinTextSize="@dimen/text_size_autosize_min"
             android:autoSizeStepGranularity="1sp"
             android:autoSizeTextType="uniform"
             android:drawableLeft="@drawable/sunny"
-            android:drawablePadding="4dp"
-            android:gravity="center"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
             android:maxLines="1"
             android:text="@string/meteoSole"
-            android:textColor="@color/widget_on_background_variant" />
+            android:textColor="@color/widget_on_background" />
 
     </LinearLayout>
 
@@ -77,13 +119,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:alpha="0.3"
+        android:layout_marginVertical="6dp"
+        android:alpha="0.35"
         android:background="@color/widget_on_background_variant" />
 
+    <!-- riepilogo settimana / mese / obiettivi -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.3"
         android:gravity="center"
         android:orientation="horizontal">
 

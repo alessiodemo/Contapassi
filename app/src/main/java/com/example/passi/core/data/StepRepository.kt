@@ -151,7 +151,4 @@ class StepRepository(private val dao: StepDao) {
         }
         return a
     }
-
-    fun modifyGoal(newValue: Int) { default_goal = newValue }
-    fun modifyHeight(newValue: Int) { default_height = newValue }
 }

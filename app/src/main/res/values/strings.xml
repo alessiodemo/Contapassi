@@ -11,12 +11,10 @@
     <string name="km">passi</string>
     <string name="passi">passi</string>
     <string name="passiStandard">Progresso rispetto all\'obiettivo di diecimila passi al giorno suggerito dall\'OMS</string>
-    <string name="statistiche">Statistiche</string>
     <string name="settimana">Settimana</string>
     <string name="mese">Mese</string>
     <string name="obiettivi">Obiettivi</string>
     <string name="title_stats">Statistiche</string>
-    <string name="element_text">Elemento della lista</string>
     <string name="giorno">--</string>
     <string name="titolo_raccolta_dati">Raccolta dati sui passi</string>
     <string name="testo_raccolta_dati">Puoi disabilitare il conteggio dei passi nei momenti di non utilizzo per risparmiare batteria sul tuo dispositivo</string>
@@ -34,7 +32,6 @@
     <string name="aggiorna_valori">Aggiorna i valori</string>
     <string name="obiettiviTot">completati</string>
     <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
     <string name="app_widget_description">Passi, calorie e chilometri di oggi direttamente sulla schermata home</string>
     <string name="widget_button_action">widgetButtonPassi</string>
     <string name="widget_button_action2">widgetButtonKm</string>

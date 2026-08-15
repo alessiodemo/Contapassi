@@ -7,7 +7,11 @@
       launcher), ma questi @android:color/system_* sono globali e disponibili a tutti.
     -->
     <color name="widget_background">@android:color/system_accent2_50</color>
+    <color name="widget_background_end">@android:color/system_accent2_100</color>
     <color name="widget_on_background">@android:color/system_neutral1_900</color>
     <color name="widget_on_background_variant">@android:color/system_neutral2_700</color>
     <color name="widget_accent">@android:color/system_accent1_600</color>
+    <color name="widget_accent_container">@android:color/system_accent1_100</color>
+    <color name="widget_on_accent_container">@android:color/system_accent1_900</color>
+    <color name="widget_track">@android:color/system_accent2_100</color>
 </resources>

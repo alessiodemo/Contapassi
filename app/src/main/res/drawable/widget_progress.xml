@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Barra di avanzamento verso l'obiettivo del giorno.
+
+  L'elemento @android:id/progress DEVE stare dentro un <clip>: senza, il livello
+  non ritaglia il disegno e la barra apparirebbe sempre piena. E' il motivo per cui
+  una progressDrawable scritta a mano spesso "non si muove".
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="4dp" />
+            <solid android:color="@color/widget_track" />
+            <size android:height="7dp" />
+        </shape>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="4dp" />
+                <solid android:color="@color/widget_accent" />
+                <size android:height="7dp" />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

@@ -1,29 +1,17 @@
 package com.example.passi
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import java.text.SimpleDateFormat
-import java.util.*
 import com.example.passi.databinding.ActivityMainBinding
-import com.example.passi.home.HomeFragment
-import com.example.passi.settings.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -32,7 +20,6 @@ class MainActivity : AppCompatActivity()  {
     private lateinit var binding: ActivityMainBinding
     val model: SharedViewModel by viewModels()
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,15 +32,17 @@ class MainActivity : AppCompatActivity()  {
         // possa continuare a scriverci il titolo della destinazione corrente
         setSupportActionBar(binding.toolbar)
 
-        //richiesta dei permessi
+        // richiesta dei permessi. Solo quelli DICHIARATI nel manifest: chiedere un
+        // permesso non dichiarato non apre alcun dialogo, viene negato in silenzio.
+        // WRITE_EXTERNAL_STORAGE stava qui senza essere nel manifest, quindi non ha
+        // mai fatto nulla.
         val permissions = arrayOf(
             Manifest.permission.INTERNET,
             Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.ACTIVITY_RECOGNITION
         )
 
-        val permissionsToRequest: MutableList<String> = ArrayList()
+        val permissionsToRequest = mutableListOf<String>()
         for (permission in permissions) {
             if (ContextCompat.checkSelfPermission(
                     this,
@@ -74,7 +63,6 @@ class MainActivity : AppCompatActivity()  {
 
         val navView: BottomNavigationView = binding.navView
 
-        //val navController = findNavController(R.id.nav_host_fragment_activity_main)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(
