@@ -13,7 +13,7 @@ import android.widget.Toast
 import com.google.android.material.materialswitch.MaterialSwitch
 import androidx.core.content.ContextCompat.startForegroundService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.passi.BuildConfig
@@ -23,11 +23,15 @@ import com.example.passi.SharedViewModel
 import com.example.passi.core.data.AppDatabase
 import com.example.passi.core.data.StepRepository
 import com.example.passi.core.utility.Utility
+import com.example.passi.core.widget.StepsWidget
 import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment() {
 
-    val model: SharedViewModel by viewModels()
+    // activityViewModels, non viewModels: con viewModels ogni Fragment ottiene la PROPRIA
+    // istanza, quindi il setData() fatto qui non arrivava mai a HomeFragment. Home si
+    // aggiornava solo grazie al polling ogni 2 secondi, cioe' per caso.
+    val model: SharedViewModel by activityViewModels()
     val ut = Utility()
 
     companion object {
@@ -83,6 +87,14 @@ class SettingsFragment : Fragment() {
                     repository.updateHeight(key, altezza)
                     repository.updateGoal(key, obiettivo)
                     repository.updateWeight(key, peso)
+
+                    // Il widget legge il database ma nessuno lo avvisa quando cambia:
+                    // senza questa chiamata continuerebbe a mostrare km e kcal calcolati
+                    // con i valori vecchi fino al primo passo rilevato dal servizio, o
+                    // fino al giro giornaliero di updatePeriodMillis. Esce subito se non
+                    // ci sono widget installati.
+                    StepsWidget.aggiornaTuttiIWidget(requireContext())
+
                     model.setData(true)
                     Toast.makeText(
                         requireContext(), R.string.modifiche_salvate, Toast.LENGTH_SHORT

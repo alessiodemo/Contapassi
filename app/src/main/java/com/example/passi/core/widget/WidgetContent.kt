@@ -10,7 +10,6 @@ package com.example.passi.core.widget
  */
 data class WidgetContent(
     val passi: Int,
-    val peso: Int,
     /** avanzamento verso l'obiettivo del giorno, gia' limitato a 0..100 */
     val progresso: Int,
     val km: String,

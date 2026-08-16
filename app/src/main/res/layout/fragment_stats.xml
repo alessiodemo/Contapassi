@@ -140,6 +140,25 @@
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <!--
+          Contenitore del grafico settimanale. Serve un'altezza esplicita: il
+          FragmentContainerView sta dentro una ScrollView, quindi i figli vengono
+          misurati con altezza UNSPECIFIED e un "match_parent" collasserebbe
+          sull'altezza del contenuto invece di prendere quella dello schermo.
+        -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_m"
+            android:layout_marginBottom="@dimen/space_m">
+
+            <FrameLayout
+                android:id="@+id/graficoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/histogram_height"
+                android:padding="@dimen/space_s" />
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
 </FrameLayout>

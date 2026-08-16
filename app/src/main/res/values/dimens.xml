@@ -22,6 +22,8 @@
     <dimen name="card_corner_radius">20dp</dimen>
     <dimen name="card_content_padding">16dp</dimen>
     <dimen name="divider_height">1dp</dimen>
+    <!-- altezza del grafico settimanale: sette barre piu' etichette e valori -->
+    <dimen name="histogram_height">220dp</dimen>
     <dimen name="progress_ring_size">260dp</dimen>
     <dimen name="progress_ring_thickness">22dp</dimen>
     <!-- il raggio non puo' superare meta' dello spessore: oltre, Material lo taglia -->

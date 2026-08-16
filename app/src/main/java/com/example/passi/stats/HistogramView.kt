@@ -8,11 +8,13 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.passi.R
 import com.example.passi.core.data.StepRepository
-import java.time.LocalDate
 
-class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
+class HistogramView(context: Context, passi: MutableList<Int>) : View(context) {
 
-    private var data: MutableList<Int> = mutableListOf()
+    private var data: List<Int> = passi.toList()
+
+    /** Da dp a pixel: le misure scritte a mano in px cambiano dimensione con la densita' dello schermo. */
+    private fun dp(valore: Float) = valore * resources.displayMetrics.density
 
     /**
      * Legge un colore dal TEMA corrente (es. ?attr/colorOnSurface) invece di usare
@@ -25,149 +27,101 @@ class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
         return value.data
     }
 
-    init {
-        setValue(passi)
+    private val barPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
+    private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeWidth = dp(1f)
+    }
+    private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        textSize = dp(12f)
+        textAlign = Paint.Align.CENTER
+    }
+    private val valuePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        textSize = dp(11f)
+        textAlign = Paint.Align.CENTER
+    }
+    private val goalPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        strokeWidth = dp(1.5f)
+        color = ContextCompat.getColor(context, R.color.app_success)
+    }
+    private val goalLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        textSize = dp(10f)
+        textAlign = Paint.Align.LEFT
     }
 
     fun setValue(passi: MutableList<Int>) {
-
-        for (element in passi) {
-            data.add(element)
-        }
-
-        var count = countNonZeroValues(data)
-        data = shiftListElements(data, -getCurrentDayOfWeek()+count )
-
-
-    }
-
-    fun countNonZeroValues(list: List<Int>): Int {
-        var count = 0
-        for (value in list) {
-            if (value != 0) {
-                count++
-            }
-        }
-        return count
-    }
-
-
-    fun shiftListElements(list: MutableList<Int>, positions: Int): MutableList<Int> {
-        val size = list.size
-        val shiftAmount = positions % size
-        val adjustedShift = if (shiftAmount < 0) shiftAmount + size else shiftAmount
-        if (adjustedShift == 0) {
-            return list // No need to shift if positions is a multiple of size
-        }
-        val shiftedList = mutableListOf<Int>()
-        for (i in 0 until size) {
-            val newIndex = (i + adjustedShift) % size
-            shiftedList.add(list[newIndex])
-        }
-        return shiftedList
+        // assegnazione, non append: chiamando due volte setValue la lista raddoppiava.
+        // Nessuna rotazione: getWeekSteps() restituisce gia' sette slot indicizzati
+        // lunedi..domenica, allineati con l'array di getWeekday().
+        data = passi.toList()
+        invalidate()
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        val viewWidth = width
+        if (data.isEmpty() || width == 0 || height == 0) return
+
+        val viewWidth = width.toFloat()
         val viewHeight = height.toFloat()
-        val numBars = data.size
-        val barSpacing = viewWidth / (numBars + 1)
-        val barWidth = barSpacing / 2
 
-        val onSurface = themeColor(com.google.android.material.R.attr.colorOnSurface)
-        val onSurfaceVariant = themeColor(com.google.android.material.R.attr.colorOnSurfaceVariant)
-
-        val paint = Paint()
-        paint.style = Paint.Style.FILL
-        paint.color = themeColor(com.google.android.material.R.attr.colorPrimary)
-
-        val barMaxHeight = viewHeight * 0.9f
-
-        val max = 20000
-
-        val maxHeight = max * 1.5f
-
-        val borderPaint = Paint()
-        borderPaint.style = Paint.Style.STROKE
-        borderPaint.strokeWidth = 3f
+        labelPaint.color = themeColor(com.google.android.material.R.attr.colorOnSurface)
+        valuePaint.color = themeColor(com.google.android.material.R.attr.colorOnSurfaceVariant)
+        goalLabelPaint.color = themeColor(com.google.android.material.R.attr.colorOnSurfaceVariant)
+        barPaint.color = themeColor(com.google.android.material.R.attr.colorPrimary)
         borderPaint.color = themeColor(com.google.android.material.R.attr.colorOutline)
 
-        val axisHeight = viewHeight - barMaxHeight
+        // Lo spazio sopra e sotto si ricava dalle metriche reali dei Paint, non da una
+        // percentuale dell'altezza: e' questo che prima tagliava le etichette, perche'
+        // il 10% dell'altezza era meno dello spazio che il testo occupa davvero.
+        val labelMetrics = labelPaint.fontMetrics
+        val spazioSotto = (labelMetrics.descent - labelMetrics.ascent) + dp(6f)
 
-        val textPaint = Paint()
-        textPaint.color = onSurface
-        textPaint.textSize = 50f
-        textPaint.textAlign = Paint.Align.CENTER
+        val valueMetrics = valuePaint.fontMetrics
+        val spazioSopra = (valueMetrics.descent - valueMetrics.ascent) + dp(4f)
 
-        val valuePaint = Paint()
-        valuePaint.color = onSurfaceVariant
-        valuePaint.textSize = 50f
-        valuePaint.textAlign = Paint.Align.CENTER
+        val asseY = viewHeight - spazioSotto
+        val altezzaMax = asseY - spazioSopra
+        if (altezzaMax <= 0f) return
 
-        val backgroundPaint = Paint()
-        backgroundPaint.style = Paint.Style.FILL
-        val backgroundColor = themeColor(com.google.android.material.R.attr.colorSurface)
-        backgroundPaint.color = backgroundColor
-        canvas.drawRect(0f, 0f, viewWidth.toFloat(), viewHeight.toFloat(), backgroundPaint)
+        // fondo scala: sempre almeno il 150% dell'obiettivo, cosi' la linea del goal
+        // resta visibile anche in una settimana con pochi passi
+        val fondoScala = maxOf(StepRepository.default_goal * 1.5f, (data.maxOrNull() ?: 0) * 1.15f)
 
-        val textOffset = 60f
-        val valueOffset = 20f
+        val passoX = viewWidth / (data.size + 1)
+        val larghezzaBarra = passoX * 0.55f
 
-        val lineY = viewHeight - (StepRepository.default_goal / maxHeight * barMaxHeight) - axisHeight
-        val linePaint = Paint()
-        linePaint.color = ContextCompat.getColor(context, R.color.app_success)
-        linePaint.strokeWidth = 5f
-        canvas.drawLine(0f, lineY, viewWidth.toFloat(), lineY, linePaint)
+        // linea dell'obiettivo
+        val goalY = asseY - (StepRepository.default_goal / fondoScala * altezzaMax)
+        canvas.drawLine(0f, goalY, viewWidth, goalY, goalPaint)
+        canvas.drawText("Goal", dp(2f), goalY - dp(3f), goalLabelPaint)
 
-        val label = "Goal"
-        val labelPaint = Paint()
-        labelPaint.color = onSurfaceVariant
-        labelPaint.textSize = 40f
-        labelPaint.textAlign = Paint.Align.CENTER
-        val labelX = viewWidth / 2f
-        val labelY = lineY - 20f
-        canvas.drawText(label, labelX, labelY, labelPaint)
+        for (i in data.indices) {
+            val centroX = passoX * (i + 1)
+            val sinistra = centroX - larghezzaBarra / 2f
+            val destra = centroX + larghezzaBarra / 2f
+            val altezzaBarra = (data[i] / fondoScala * altezzaMax).coerceIn(0f, altezzaMax)
+            val cima = asseY - altezzaBarra
 
-        for (i in 0 until numBars) {
-            val barHeight = data[i] / maxHeight * barMaxHeight
+            if (altezzaBarra > 0f) {
+                canvas.drawRect(sinistra, cima, destra, asseY, barPaint)
+                canvas.drawRect(sinistra, cima, destra, asseY, borderPaint)
+            }
 
-            val top = viewHeight - barHeight - axisHeight
-            val bottom = viewHeight - axisHeight
-            val left = barSpacing * (i + 1) - barWidth / 2f
-            val right = left + barWidth
+            // valore sopra la barra, mai sopra il bordo della view
+            val valoreY = (cima - dp(3f)).coerceAtLeast(-valueMetrics.ascent)
+            canvas.drawText(data[i].toString(), centroX, valoreY, valuePaint)
 
-            canvas.drawRect(left, top, right, bottom, paint)
-            canvas.drawRect(left, top, right, bottom, borderPaint)
-
-            val value = data[i]
-            val centerX = (left + right) / 2f
-            val valueY = top - valueOffset
-            canvas.drawText(value.toString(), centerX, valueY, valuePaint)
-
-            val weekday = getWeekday(i)
-            val centerY = bottom + textOffset
-
-            canvas.save()
-            canvas.rotate(-90f, centerX, centerY)
-            canvas.drawText(weekday, centerX, centerY, textPaint)
-            canvas.restore()
+            // etichetta orizzontale: "Mon" a 12dp occupa ~30dp, mentre ogni barra ne ha
+            // circa 45. La rotazione di -90 gradi non serviva e faceva uscire il testo
+            // dal bordo inferiore.
+            canvas.drawText(getWeekday(i), centroX, asseY - labelMetrics.ascent + dp(4f), labelPaint)
         }
 
-        val axisY = viewHeight - axisHeight
-        canvas.drawLine(0f, axisY, viewWidth.toFloat(), axisY, borderPaint)
+        canvas.drawLine(0f, asseY, viewWidth, asseY, borderPaint)
     }
 
     private fun getWeekday(index: Int): String {
-        val weekdays = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-        return weekdays[index]
-    }
-
-    fun getCurrentDayOfWeek(): Int {
-        val currentDate = LocalDate.now()
-        val currentDayOfWeek = currentDate.dayOfWeek
-
-        return currentDayOfWeek.value
-        //return 5 //friday
+        val weekdays = arrayOf("Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom")
+        return weekdays.getOrElse(index) { "" }
     }
 }

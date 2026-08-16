@@ -136,7 +136,6 @@ class StepsWidget : AppWidgetProvider() {
 
             return WidgetContent(
                 passi = passi,
-                peso = peso,
                 // il controllo su obiettivo > 0 non e' formale: Utility.getProgress fa una
                 // divisione intera e con obiettivo a 0 lancerebbe ArithmeticException,
                 // uccidendo l'aggiornamento del widget

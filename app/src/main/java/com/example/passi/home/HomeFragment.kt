@@ -11,7 +11,7 @@ import com.google.android.material.color.MaterialColors
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.passi.core.location.LocationProvider
@@ -33,7 +33,9 @@ class HomeFragment : Fragment() {
         fun newInstance() = HomeFragment()
     }
 
-    val model: SharedViewModel by viewModels()
+    // condiviso con SettingsFragment tramite l'Activity: salvando altezza o peso,
+    // Home si aggiorna subito invece di aspettare il prossimo giro di polling
+    val model: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

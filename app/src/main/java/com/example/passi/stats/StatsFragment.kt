@@ -44,7 +44,7 @@ class StatsFragment : Fragment() {
             var days = mutableListOf<Int>()
             days =
                 repository.getWeekSteps() //per riempire la lista dei valori da mettere nel grafico
-            val mainLayout: FrameLayout = view.findViewById(R.id.frame)
+            val mainLayout: FrameLayout = view.findViewById(R.id.graficoContainer)
             val histogramView = HistogramView(requireContext(), days)
             mainLayout.addView(histogramView)
         }
