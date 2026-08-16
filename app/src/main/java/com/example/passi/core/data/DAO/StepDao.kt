@@ -21,6 +21,9 @@ interface StepDao {
     @Query ("UPDATE steps SET height = :height WHERE id = :id")
     suspend fun updateHeight(id: String, height: Int)
 
+    @Query ("UPDATE steps SET weight = :weight WHERE id = :id")
+    suspend fun updateWeight(id: String, weight: Int)
+
     @Query("SELECT * FROM steps WHERE id = :id")
     suspend fun getById(id: String): StepEntity?
 

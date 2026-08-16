@@ -7,7 +7,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.passi.core.data.DAO.StepDao
 
-@Database(entities = [StepEntity::class], version = 1)
+// version 2: aggiunta la colonna weight e rimossa day (scritta e mai riletta).
+// Con fallbackToDestructiveMigration il DB viene ricreato da zero al primo avvio:
+// nessuna Migration da scrivere, ma lo storico dei passi precedente viene perso.
+@Database(entities = [StepEntity::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun stepDao(): StepDao
 

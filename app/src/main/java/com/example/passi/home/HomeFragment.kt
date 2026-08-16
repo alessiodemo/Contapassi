@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
                 view.findViewById<CircularProgressIndicator>(R.id.passiProgress)
                     .setProgressCompat(ut.getProgress(valoriPassi[0], valoriPassi[1]), true)
                 view.findViewById<TextView>(R.id.calorieTesto).text =
-                    getString(R.string.formato_kcal, ut.getCalories(valoriPassi[0]))
+                    getString(R.string.formato_kcal, ut.getCalories(valoriPassi[0], valoriPassi[2], valoriPassi[3]))
                 view.findViewById<TextView>(R.id.kmTesto).text =
                     getString(R.string.formato_km, ut.getDistance(valoriPassi[0], valoriPassi[2]))
                 view.findViewById<LinearProgressIndicator>(R.id.OMSProgress)

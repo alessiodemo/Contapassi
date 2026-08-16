@@ -110,7 +110,8 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- altezza -->
+        <!-- altezza e peso: i due campi condividono la colonna di destra,
+             cosi' la scheda resta della stessa altezza delle altre in landscape -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,31 +136,55 @@
                         style="@style/PassiText.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/titolo_altezza" />
+                        android:text="@string/titolo_altezzapeso" />
 
                     <TextView
                         style="@style/PassiText.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_xs"
-                        android:text="@string/testo_altezza" />
+                        android:text="@string/testo_altezzapeso" />
                 </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/PassiTextField"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    app:suffixText="@string/altezzaEtichetta">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputAltezza"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/PassiTextField"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:importantForAutofill="no"
-                        android:inputType="number"
-                        android:textSize="@dimen/text_size_body" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:hint="@string/altezza"
+                        app:suffixText="@string/altezzaEtichetta">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputAltezza"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:textSize="@dimen/text_size_body" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/PassiTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_s"
+                        android:hint="@string/peso"
+                        app:suffixText="@string/pesoEtichetta">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputPeso"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:textSize="@dimen/text_size_body" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

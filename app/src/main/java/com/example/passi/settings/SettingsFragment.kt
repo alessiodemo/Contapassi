@@ -55,6 +55,7 @@ class SettingsFragment : Fragment() {
                 val valoriPassi = repository.getValueFromKey(key)
                 view.findViewById<EditText>(R.id.inputObiettivo).setText(valoriPassi[1].toString())
                 view.findViewById<EditText>(R.id.inputAltezza).setText(valoriPassi[2].toString())
+                view.findViewById<EditText>(R.id.inputPeso).setText(valoriPassi[3].toString())
             }
         }
 
@@ -67,15 +68,21 @@ class SettingsFragment : Fragment() {
             //imposta le azioni alla modifica dell'obiettivo e dell'altezza
             view.findViewById<Button>(R.id.aggiornaValori).setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
+                    val altezza = view.findViewById<EditText>(R.id.inputAltezza).text.toString().toIntOrNull()
+                    val peso = view.findViewById<EditText>(R.id.inputPeso).text.toString().toIntOrNull()
+                    val obiettivo = view.findViewById<EditText>(R.id.inputObiettivo).text.toString().toIntOrNull()
+
+                    if (altezza == null || peso == null || obiettivo == null ||
+                        altezza <= 0 || peso <= 0 || obiettivo <= 0) {
+                        Toast.makeText(requireContext(), R.string.valori_non_validi,
+                            Toast.LENGTH_SHORT).show()
+                        return@launch
+                    }
+
                     val key = repository.formatKey(ut.getDataOggi())
-                    repository.updateHeight(
-                        key,
-                        view.findViewById<EditText>(R.id.inputAltezza).text.toString().toInt()
-                    )
-                    repository.updateGoal(
-                        key,
-                        view.findViewById<EditText>(R.id.inputObiettivo).text.toString().toInt()
-                    )
+                    repository.updateHeight(key, altezza)
+                    repository.updateGoal(key, obiettivo)
+                    repository.updateWeight(key, peso)
                     model.setData(true)
                     Toast.makeText(
                         requireContext(), R.string.modifiche_salvate, Toast.LENGTH_SHORT

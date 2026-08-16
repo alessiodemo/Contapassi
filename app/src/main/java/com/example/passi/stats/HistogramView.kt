@@ -70,7 +70,7 @@ class HistogramView(context: Context, passi:MutableList<Int>) : View(context) {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         val viewWidth = width
-        val viewHeight = -1000f
+        val viewHeight = height.toFloat()
         val numBars = data.size
         val barSpacing = viewWidth / (numBars + 1)
         val barWidth = barSpacing / 2

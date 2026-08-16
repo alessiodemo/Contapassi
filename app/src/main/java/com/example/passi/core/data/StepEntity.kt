@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "steps")
 data class StepEntity(
     @PrimaryKey val id: String,
-    val day: String,
     val steps: Int,
     val goal: Int,
-    val height: Int
+    val height: Int,
+    val weight: Int
 )
 

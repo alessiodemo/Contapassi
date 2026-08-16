@@ -132,15 +132,17 @@ class StepsWidget : AppWidgetProvider() {
             val altezza = valori[2]
             val settimana = repository.totalWeeklySteps()
             val mese = repository.totalMonthlySteps()
+            val peso = valori[3]
 
             return WidgetContent(
                 passi = passi,
+                peso = peso,
                 // il controllo su obiettivo > 0 non e' formale: Utility.getProgress fa una
                 // divisione intera e con obiettivo a 0 lancerebbe ArithmeticException,
                 // uccidendo l'aggiornamento del widget
                 progresso = if (obiettivo > 0) minOf(passi * 100 / obiettivo, 100) else 0,
                 km = ut.getDistance(passi, altezza),
-                kcal = ut.getCalories(passi),
+                kcal = ut.getCalories(passi, altezza, peso),
                 temperatura = ut.loadData(context, "temperatura").toInt(),
                 codiceMeteo = ut.loadData(context, "meteo").toInt(),
                 passiSettimana = settimana.toString(),
