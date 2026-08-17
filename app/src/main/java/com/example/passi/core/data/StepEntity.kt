@@ -1,5 +1,6 @@
 package com.example.passi.core.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -10,6 +11,8 @@ data class StepEntity(
     val steps: Int,
     val goal: Int,
     val height: Int,
-    val weight: Int
+    val weight: Int,
+    @ColumnInfo(defaultValue = "0") val distanzaKm: Double = 0.0,
+    @ColumnInfo(defaultValue = "0") val kcal: Double = 0.0
 )
 

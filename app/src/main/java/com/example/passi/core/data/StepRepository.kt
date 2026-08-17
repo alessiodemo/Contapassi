@@ -74,28 +74,12 @@ class StepRepository(private val dao: StepDao) {
         dao.updateWeight(key, weight)
     }
 
-    suspend fun getValueFromKey(data: String): Array<Int> {
-        if (!contains(data)) inserisciTuplaSteps(0, 0, 0,0)
-        val e = dao.getById(data) ?: return arrayOf(-1)
-        return arrayOf(e.steps, e.goal, e.height, e.weight)
-    }
-
-    suspend fun totalWeeklySteps(): Int = getWeekSteps().sum()
-
-    suspend fun totalMonthlySteps(): Int {
-        var day = LocalDate.now().dayOfMonth
-        var steps = 0
-        while (day > 0) {
-            val key = formatKey(LocalDate.now().minusDays((day - 1).toLong()))
-            if (contains(key)) steps += getValueFromKey(key)[0]
-            day--
-        }
-        return steps
+    suspend fun accumula(key: String, dPassi: Int, dKm: Double, dKcal: Double) {
+        if (!contains(key)) inserisciTuplaSteps(0, 0, 0, 0)
+        dao.accumula(key, dPassi, dKm, dKcal)
     }
 
     suspend fun goalsReached(): Int = dao.countGoalsReached()
-
-    fun getCurrentDayOfWeek(): Int = LocalDate.now().dayOfWeek.value
 
     suspend fun getWeekSteps(): MutableList<Int> {
         val dati = MutableList(7) { 0 }
@@ -113,8 +97,23 @@ class StepRepository(private val dao: StepDao) {
         val a = mutableListOf<GoalRow>()
         for (e in dao.getAllOrderedById()) {
             val date = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).parse(e.id) ?: continue
-            a.add(GoalRow(date, e.steps, e.goal, e.height, e.weight))
+            a.add(GoalRow(date, e.steps, e.goal, e.distanzaKm, e.kcal))
         }
         return a
     }
+
+    suspend fun getRow(key: String): StepEntity {
+        if (!contains(key)) inserisciTuplaSteps(0, 0, 0,0)
+        return dao.getById(key) ?: StepEntity(key, 0, default_goal, default_height, default_weight)
+    }
+
+    private fun chiaveOggi() = formatKey(LocalDate.now())
+    private fun chiaveLunedi() = LocalDate.now().let {
+        formatKey(it.minusDays((it.dayOfWeek.value - 1).toLong())) }
+    private fun chiavePrimoMese() = formatKey(LocalDate.now().withDayOfMonth(1))
+    suspend fun passiSettimana() = dao.sommaPassi(chiaveLunedi(), chiaveOggi())
+    suspend fun kmSettimana() = dao.sommaDistanza(chiaveLunedi(), chiaveOggi())
+    suspend fun passiMese() = dao.sommaPassi(chiavePrimoMese(), chiaveOggi())
+    suspend fun kmMese() = dao.sommaDistanza(chiavePrimoMese(), chiaveOggi())
+
 }

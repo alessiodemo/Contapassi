@@ -3,12 +3,17 @@ package com.example.passi.settings
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.materialswitch.MaterialSwitch
 import androidx.core.content.ContextCompat.startForegroundService
@@ -26,13 +31,18 @@ import com.example.passi.core.utility.Utility
 import com.example.passi.core.widget.StepsWidget
 import kotlinx.coroutines.launch
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(), SensorEventListener {
 
     // activityViewModels, non viewModels: con viewModels ogni Fragment ottiene la PROPRIA
     // istanza, quindi il setData() fatto qui non arrivava mai a HomeFragment. Home si
     // aggiornava solo grazie al polling ogni 2 secondi, cioe' per caso.
     val model: SharedViewModel by activityViewModels()
     val ut = Utility()
+
+    private var sensorManager: SensorManager? = null
+    private var passiIniziali = -1
+    private var passiContati = 0
+    private var inCalibrazione = false
 
     companion object {
         fun newInstance() = SettingsFragment()
@@ -48,18 +58,34 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         val repository = StepRepository(AppDatabase.getInstance(requireContext()).stepDao())
+
+        val bottoneAvvia = view.findViewById<Button>(R.id.avviaCalibrazione)
+        bottoneAvvia.setOnClickListener {
+            if (inCalibrazione) {
+                fermaCalibrazione()
+                bottoneAvvia.setText(R.string.calibrazione_avvia)
+            } else {
+                avviaCalibrazione()
+                bottoneAvvia.setText(R.string.calibrazione_ferma)
+            }
+        }
 
         //crea l'observer che aggiorna l'interfaccia
         val obs = Observer<Boolean> { _ ->
             viewLifecycleOwner.lifecycleScope.launch {
                 //recupera i obiettivo e altezza dal database e aggiornali
                 val key = repository.formatKey(ut.getDataOggi())
-                val valoriPassi = repository.getValueFromKey(key)
-                view.findViewById<EditText>(R.id.inputObiettivo).setText(valoriPassi[1].toString())
-                view.findViewById<EditText>(R.id.inputAltezza).setText(valoriPassi[2].toString())
-                view.findViewById<EditText>(R.id.inputPeso).setText(valoriPassi[3].toString())
+                val riga = repository.getRow(key)
+                val calibrato = ut.loadData(requireContext(), "lunghezzaPasso")
+                val passo = ut.lunghezzaPassoCm(requireContext(), riga.height)
+                view.findViewById<TextView>(R.id.passoAttuale).text = getString(
+                    if (calibrato > 0) R.string.passo_calibrato else R.string.passo_stimato,
+                    ut.formatTreCifre(passo))
+                view.findViewById<EditText>(R.id.inputObiettivo).setText(riga.goal.toString())
+                view.findViewById<EditText>(R.id.inputAltezza).setText(riga.height.toString())
+                view.findViewById<EditText>(R.id.inputPeso).setText(riga.weight.toString())
             }
         }
 
@@ -117,7 +143,43 @@ class SettingsFragment : Fragment() {
                     }
                 }
 
-            //imposta lo stato iniziale dello switch
+            view.findViewById<Button>(R.id.salvaCalibrazione).setOnClickListener {
+                if (inCalibrazione) {
+                    fermaCalibrazione()
+                    bottoneAvvia.setText(R.string.calibrazione_avvia)
+                }
+
+                val testo = view.findViewById<EditText>(R.id.inputMetri).text.toString().replace(',', '.')
+                val metri = testo.toDoubleOrNull()
+
+                if (metri == null || metri < 20 || passiContati < 20) {
+                    Toast.makeText(requireContext(), R.string.calibrazione_troppo_corta,
+                        Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
+                val passoCm = metri * 100 / passiContati
+
+                if (passoCm < 30 || passoCm > 110) {
+                    Toast.makeText(requireContext(), R.string.calibrazione_fuori_range,
+                        Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
+                ut.saveData(requireContext(), "lunghezzaPasso", passoCm.toFloat())
+                model.setData(true)
+                Toast.makeText(requireContext(),
+                    getString(R.string.calibrazione_salvata, ut.formatTreCifre(passoCm)),
+                    Toast.LENGTH_LONG).show()
+            }
+
+            view.findViewById<Button>(R.id.azzeraCalibrazione).setOnClickListener {
+                ut.saveData(requireContext(), "lunghezzaPasso", 0f)
+                model.setData(true)
+            }
+
+
+        //imposta lo stato iniziale dello switch
             val status = isForegroundServiceRunning(ForegroundService::class.java)
             view.findViewById<MaterialSwitch>(R.id.raccolta_dati_switch).isChecked = status
     }
@@ -133,6 +195,34 @@ class SettingsFragment : Fragment() {
             }
         }
         return false
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        val conteggio = event?.values?.get(0)?.toInt() ?: return
+        if (passiIniziali < 0) passiIniziali = conteggio
+        passiContati = conteggio - passiIniziali
+        view?.findViewById<TextView>(R.id.passiCalibrazione)?.text = passiContati.toString()
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+
+    private fun avviaCalibrazione() {
+        passiIniziali = -1
+        passiContati = 0
+        val sensore = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) ?: return
+        sensorManager?.registerListener(this, sensore, SensorManager.SENSOR_DELAY_UI)
+        inCalibrazione = true
+    }
+
+    private fun fermaCalibrazione() {
+        sensorManager?.unregisterListener(this)
+        inCalibrazione = false
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        sensorManager?.unregisterListener(this)
     }
 
 

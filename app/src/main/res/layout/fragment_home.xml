@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_s"
                         android:gravity="center"
-                        android:text="@string/km" />
+                        android:text="@string/kmEtichetta" />
                 </LinearLayout>
 
             </LinearLayout>

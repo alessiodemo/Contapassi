@@ -8,7 +8,6 @@
     <string name="passiObiettivo">/0</string>
     <string name="meteoSole">Soleggiato</string>
     <string name="temperatura">-- °C</string>
-    <string name="km">passi</string>
     <string name="passi">passi</string>
     <string name="passiStandard">Progresso rispetto all\'obiettivo di diecimila passi al giorno suggerito dall\'OMS</string>
     <string name="settimana">Settimana</string>
@@ -34,6 +33,22 @@
     <string name="kcalEtichetta">0 kcal</string>
     <string name="aggiorna_valori">Aggiorna i valori</string>
     <string name="valori_non_validi">Inserisci un numero maggiore di zero in tutti i campi</string>
+
+    <!-- calibrazione della lunghezza del passo -->
+    <string name="titolo_calibrazione">Calibra il tuo passo</string>
+    <string name="testo_calibrazione">Il passo viene stimato dalla tua altezza, ma varia del 10-15%% da persona a persona. Misura un tratto che conosci, premi Avvia, percorrilo camminando normalmente e inserisci i metri: da lì in poi chilometri e calorie useranno il tuo passo reale.</string>
+    <string name="calibrazione_avvia">Avvia</string>
+    <string name="calibrazione_ferma">Fine</string>
+    <string name="calibrazione_salva">Salva calibrazione</string>
+    <string name="calibrazione_azzera">Torna alla stima dall\'altezza</string>
+    <string name="calibrazione_distanza">Distanza percorsa</string>
+    <string name="metriEtichetta">metri</string>
+    <string name="passo_stimato_vuoto">Passo attuale: --</string>
+    <string name="passo_stimato">Passo attuale: %1$s cm (stimato dall\'altezza)</string>
+    <string name="passo_calibrato">Passo attuale: %1$s cm (misurato da te)</string>
+    <string name="calibrazione_troppo_corta">Servono almeno 20 passi e 20 metri perché la misura sia affidabile</string>
+    <string name="calibrazione_fuori_range">Risultato non plausibile: controlla di aver inserito i metri, non i centimetri</string>
+    <string name="calibrazione_salvata">Passo calibrato: %1$s cm</string>
     <string name="obiettiviTot">completati</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="app_widget_description">Passi, calorie e chilometri di oggi direttamente sulla schermata home</string>

@@ -5,13 +5,12 @@ import com.example.passi.core.utility.Utility
 
 val ut = Utility()
 
-class GoalRow(d: Date, p: Int, o: Int, a: Int, pe: Int) {
+class GoalRow(d: Date, p: Int, o: Int, km: Double, kc: Double) {
     val passi = p
     val obiettivo = o
-    val peso = pe
     val mese = ut.dataMeseAbbreviato(d)
     val giorno = ut.dataGiorno(d)
     val done = passi >= obiettivo
-    val kcal = ut.getCalories(passi, a, peso)
-    val distanza = ut.getDistance(passi, a)
+    val kcal = ut.formatTreCifre(kc)
+    val distanza = ut.formatTreCifre(km)
 }

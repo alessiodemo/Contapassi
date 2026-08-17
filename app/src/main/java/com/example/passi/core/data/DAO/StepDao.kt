@@ -38,4 +38,13 @@ interface StepDao {
 
     @Query("SELECT COUNT(id) FROM steps WHERE steps > goal")
     suspend fun countGoalsReached(): Int
+
+    @Query("UPDATE steps SET steps = steps + :dPassi, distanzaKm = distanzaKm + :dKm, kcal = kcal + :dKcal WHERE id = :id")
+    suspend fun accumula(id: String, dPassi: Int, dKm: Double, dKcal: Double)
+
+    @Query("SELECT COALESCE(SUM(steps),0) FROM steps WHERE id BETWEEN :da AND :a")
+    suspend fun sommaPassi(da: String, a: String): Int
+
+    @Query("SELECT COALESCE(SUM(distanzaKm),0) FROM steps WHERE id BETWEEN :da  AND :a")
+    suspend fun sommaDistanza(da: String, a: String): Double
 }

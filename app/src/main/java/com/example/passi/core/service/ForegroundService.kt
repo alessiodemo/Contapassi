@@ -37,13 +37,18 @@ class ForegroundService: Service(), SensorEventListener {
     private lateinit var repository: StepRepository
     private var sensorManager: SensorManager? = null
 
+    private var ultimoConteggio = 0
+    private var ultimoTimestamp = 0L
+
     companion object {
         const val ACTION_STOP = "${BuildConfig.APPLICATION_ID}.stop"
+        const val SOGLIA_CORSA = 140.0
     }
 
     override fun onCreate() {
         super.onCreate()
         repository = StepRepository(AppDatabase.getInstance(this).stepDao())
+        ultimoConteggio = Utility().loadData(this, "passiPr").toInt()
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         if (stepSensor == null) {
@@ -68,21 +73,39 @@ class ForegroundService: Service(), SensorEventListener {
 
 
     override fun onSensorChanged(event: SensorEvent?) {
-        val sensorSteps = event!!.values[0].toInt()
+        val e = event ?: return
+        val conteggio = e.values[0].toInt()
+        val timestamp = e.timestamp
+
+        val precedente = ultimoConteggio
+        val tsPrecedente = ultimoTimestamp
+        ultimoConteggio = conteggio
+        ultimoTimestamp = timestamp
+
+        val deltaPassi = when {
+            precedente == 0 -> 0
+            conteggio < precedente -> conteggio
+            else -> conteggio - precedente
+        }
+
+        val secondi = if (tsPrecedente > 0) (timestamp - tsPrecedente) / 1_000_000_000.0 else 0.0
+        val corsa = deltaPassi >= 5 && secondi > 0 && deltaPassi / secondi * 60 >= SOGLIA_CORSA
+
         serviceScope.launch {
-            //prepara il database
             val ut = Utility()
+            ut.saveData(this@ForegroundService, "passiPr", conteggio.toFloat())
+            if (deltaPassi <= 0) return@launch
+
             val key = repository.formatKey(ut.getDataOggi())
-            val previousDbSteps = repository.getValueFromKey(key)[0]
-            val previousSteps = ut.loadData(this@ForegroundService, "passiPr").toInt()
-            if(sensorSteps >= previousSteps) {
-                if(previousSteps != 0){
-                    repository.updateSteps(key, previousDbSteps + (sensorSteps - previousSteps))
-                }
-            } else {
-                repository.updateSteps(key, previousDbSteps + sensorSteps)
-            }
-            ut.saveData(this@ForegroundService, "passiPr", sensorSteps.toFloat())
+            val riga = repository.getRow(key)
+            val altezza = riga.height
+            val peso = riga.weight
+
+            val passoCm = ut.lunghezzaPassoCm(this@ForegroundService, altezza)* (if (corsa) 1.55 else 1.0)
+            val deltaKm = deltaPassi * passoCm / 100_000
+            val deltaKcal = deltaKm * peso * (if (corsa) 1.0 else 0.5)
+
+            repository.accumula(key, deltaPassi, deltaKm, deltaKcal)
             updateWidget()
         }
     }

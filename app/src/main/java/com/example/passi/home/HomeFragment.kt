@@ -58,22 +58,22 @@ class HomeFragment : Fragment() {
                 view.findViewById<TextView>(R.id.giorno).text = ut.dataSGMA(ut.getDataOggi())
                 //recupera i passi dal database e aggiornali
                 val key = repository.formatKey(ut.getDataOggi())
-                val valoriPassi = repository.getValueFromKey(key)
-                view.findViewById<TextView>(R.id.passiOggi).text = valoriPassi[0].toString()
+                val riga = repository.getRow(key)
+                view.findViewById<TextView>(R.id.passiOggi).text = riga.steps.toString()
                 view.findViewById<TextView>(R.id.passiObiettivo).text =
-                    getString(R.string.formato_obiettivo, valoriPassi[1])
+                    getString(R.string.formato_obiettivo, riga.goal)
                 // setProgressCompat e' l'equivalente Material di setProgress(valore, true):
                 // anima la transizione usando le animazioni dell'indicatore M3
                 view.findViewById<CircularProgressIndicator>(R.id.passiProgress)
-                    .setProgressCompat(ut.getProgress(valoriPassi[0], valoriPassi[1]), true)
+                    .setProgressCompat(ut.getProgress(riga.steps, riga.goal), true)
                 view.findViewById<TextView>(R.id.calorieTesto).text =
-                    getString(R.string.formato_kcal, ut.getCalories(valoriPassi[0], valoriPassi[2], valoriPassi[3]))
+                    getString(R.string.formato_kcal, ut.formatTreCifre(riga.kcal))
                 view.findViewById<TextView>(R.id.kmTesto).text =
-                    getString(R.string.formato_km, ut.getDistance(valoriPassi[0], valoriPassi[2]))
+                    getString(R.string.formato_km, ut.formatTreCifre(riga.distanzaKm))
                 view.findViewById<LinearProgressIndicator>(R.id.OMSProgress)
-                    .setProgressCompat(ut.getProgress(valoriPassi[0], 10000), true)
+                    .setProgressCompat(ut.getProgress(riga.steps, 10000), true)
 
-                if (ut.getProgress(valoriPassi[0], 10000) >= 100) {
+                if (ut.getProgress(riga.steps, 10000) >= 100) {
                     view.findViewById<TextView>(R.id.OMS).text =
                         getString(R.string.complimenti_oms)
                     view.findViewById<TextView>(R.id.OMS).textSize = 18F

@@ -176,5 +176,90 @@
             android:text="@string/aggiorna_valori"
             app:icon="@drawable/update" />
 
+        <!-- calibrazione del passo -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_m"
+            android:layout_marginTop="@dimen/space_l"
+            android:layout_marginBottom="@dimen/space_s">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/card_content_padding">
+
+                <TextView
+                    style="@style/PassiText.Subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titolo_calibrazione" />
+
+                <TextView
+                    style="@style/PassiText.Caption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/testo_calibrazione" />
+
+                <!-- stato corrente: dice se il passo e' stimato o misurato -->
+                <TextView
+                    android:id="@+id/passoAttuale"
+                    style="@style/PassiText.Body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:text="@string/passo_stimato_vuoto" />
+
+                <TextView
+                    android:id="@+id/passiCalibrazione"
+                    style="@style/PassiText.Metric"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:gravity="center"
+                    android:text="@string/passiOggi" />
+
+                <Button
+                    android:id="@+id/avviaCalibrazione"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/calibrazione_avvia" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/PassiTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:hint="@string/calibrazione_distanza"
+                    app:suffixText="@string/metriEtichetta">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputMetri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="numberDecimal"
+                        android:textSize="@dimen/text_size_body" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/salvaCalibrazione"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/calibrazione_salva" />
+
+                <Button
+                    android:id="@+id/azzeraCalibrazione"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calibrazione_azzera" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 </FrameLayout>

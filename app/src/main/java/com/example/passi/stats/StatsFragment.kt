@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.passi.R
 import com.example.passi.core.data.AppDatabase
 import com.example.passi.core.data.StepRepository
+import com.example.passi.core.data.ut
 import kotlinx.coroutines.launch
 
 class StatsFragment : Fragment() {
@@ -34,10 +35,11 @@ class StatsFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            view.findViewById<TextView>(R.id.mediaPassiSettimana).text =
-                repository.totalWeeklySteps().toString()
-            view.findViewById<TextView>(R.id.mediaPassiMese).text =
-                repository.totalMonthlySteps().toString()
+            view.findViewById<TextView>(R.id.mediaKmSettimana).text =
+                getString(R.string.formato_km,
+                    ut.formatTreCifre(repository.kmSettimana()))
+            view.findViewById<TextView>(R.id.mediaKmMese).text =
+                getString(R.string.formato_km, ut.formatTreCifre(repository.kmMese()))
             view.findViewById<TextView>(R.id.obiettiviRaggiunti).text =
                 repository.goalsReached().toString()
 

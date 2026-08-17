@@ -126,28 +126,22 @@ class StepsWidget : AppWidgetProvider() {
         suspend fun caricaContenuto(context: Context): WidgetContent {
             val ut = Utility()
             val repository = StepRepository(AppDatabase.getInstance(context).stepDao())
-            val valori = repository.getValueFromKey(repository.formatKey(ut.getDataOggi()))
-            val passi = valori[0]
-            val obiettivo = valori[1]
-            val altezza = valori[2]
-            val settimana = repository.totalWeeklySteps()
-            val mese = repository.totalMonthlySteps()
-            val peso = valori[3]
+            val riga = repository.getRow(repository.formatKey(ut.getDataOggi()))
 
             return WidgetContent(
-                passi = passi,
+                passi = riga.steps,
                 // il controllo su obiettivo > 0 non e' formale: Utility.getProgress fa una
                 // divisione intera e con obiettivo a 0 lancerebbe ArithmeticException,
                 // uccidendo l'aggiornamento del widget
-                progresso = if (obiettivo > 0) minOf(passi * 100 / obiettivo, 100) else 0,
-                km = ut.getDistance(passi, altezza),
-                kcal = ut.getCalories(passi, altezza, peso),
+                progresso = if (riga.goal > 0) minOf(riga.steps * 100 / riga.goal, 100) else 0,
+                km = ut.formatTreCifre(riga.distanzaKm),
+                kcal = ut.formatTreCifre(riga.kcal),
                 temperatura = ut.loadData(context, "temperatura").toInt(),
                 codiceMeteo = ut.loadData(context, "meteo").toInt(),
-                passiSettimana = settimana.toString(),
-                kmSettimana = ut.getDistance(settimana, altezza),
-                passiMese = mese.toString(),
-                kmMese = ut.getDistance(mese, altezza),
+                passiSettimana = repository.passiSettimana().toString(),
+                kmSettimana = ut.formatTreCifre(repository.kmSettimana()),
+                passiMese = repository.passiMese().toString(),
+                kmMese = ut.formatTreCifre(repository.kmMese()),
                 obiettiviRaggiunti = repository.goalsReached().toString(),
                 mostraKm = ut.loadData(context, KEY_MOSTRA_KM) == 1f
             )
