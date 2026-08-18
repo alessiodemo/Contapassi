@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.passi.core.data.StepEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StepDao {
@@ -47,4 +48,14 @@ interface StepDao {
 
     @Query("SELECT COALESCE(SUM(distanzaKm),0) FROM steps WHERE id BETWEEN :da  AND :a")
     suspend fun sommaDistanza(da: String, a: String): Double
+
+    /**
+     * Query osservata: non e' suspend e non ritorna un valore singolo ma un Flow.
+     * Room la registra sull'InvalidationTracker della tabella steps e la riesegue a
+     * ogni scrittura su quella tabella, da qualunque punto del processo arrivi -
+     * compreso il ForegroundService, che gira su un altro thread e non conosce la UI.
+     * E' quello che rende inutile il polling: la notifica arriva dal database.
+     */
+    @Query("SELECT * FROM steps WHERE id = :id")
+    fun osservaRiga(id: String): Flow<StepEntity?>
 }

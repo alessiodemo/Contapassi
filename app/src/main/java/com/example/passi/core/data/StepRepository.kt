@@ -1,6 +1,7 @@
 package com.example.passi.core.data
 
 import com.example.passi.core.data.DAO.StepDao
+import kotlinx.coroutines.flow.Flow
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -116,4 +117,9 @@ class StepRepository(private val dao: StepDao) {
     suspend fun passiMese() = dao.sommaPassi(chiavePrimoMese(), chiaveOggi())
     suspend fun kmMese() = dao.sommaDistanza(chiavePrimoMese(), chiaveOggi())
 
+    /**
+     * Non e' suspend: non esegue niente, restituisce il Flow che Room riemettera' a
+     * ogni scrittura sulla tabella. Il lavoro parte quando qualcuno lo raccoglie.
+     */
+    fun osservaRiga(key: String): Flow<StepEntity?> = dao.osservaRiga(key)
 }
